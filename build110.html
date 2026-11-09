@@ -577,7 +577,7 @@ body[data-theme="xmas"] .post-card, body[data-theme="xmas"] .post-composer{backg
 .mrail-menu button.active{color:var(--gold)}
 .mrail-menu button .mr-dot{width:7px; height:7px; border-radius:50%; background:var(--gold); opacity:0; flex:none}
 .mrail-menu button.active .mr-dot{opacity:1}
-@media (max-width:760px){ .mrail{left:10px; top:182px; bottom:auto; transform:none} .mrail-menu{top:calc(100% + 10px); bottom:auto} } /* 97g: phone header is slimmer (18+132+18+2 = 170px), rail parks under it too */
+@media (max-width:760px){ .mrail{position:absolute; left:10px; top:182px; bottom:auto; transform:none} /* FIX 3 (his finale-test catch, Nov 9): on phones the rail parks by the header line and SCROLLS WITH THE PAGE — absolute in the document, not fixed to the glass. His words: it should move up with the site. Desktop keeps its fixed rail, untouched. */ .mrail-menu{top:calc(100% + 10px); bottom:auto} } /* 97g: phone header is slimmer (18+132+18+2 = 170px), rail parks under it too */
 .river-bar{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:-6px 0 16px}
 .river-bar .rv-label{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted)}
 .river-members{display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin:-8px 0 16px; font-family:var(--mono); font-size:12px; color:var(--muted)}
