@@ -590,9 +590,9 @@ body[data-theme="xmas"] .post-card, body[data-theme="xmas"] .post-composer{backg
    lit full at a time, the rest transparent, letters glowing gold one
    by one as it teaches. */
 #sea-help-modal{padding:0; background:rgba(10,5,18,.9)}
-#sea-help-modal .waters-guide-card{width:100vw; max-width:none; height:100dvh; max-height:none; overflow-y:auto; border:none; border-radius:0; background:rgba(21,13,32,.66); text-align:left; padding:40px 5vw 34px max(5vw,124px); box-shadow:none}
+#sea-help-modal .waters-guide-card{width:100vw; max-width:none; height:100dvh; max-height:none; overflow-y:auto; border:none; border-radius:0; background:rgba(21,13,32,.66); text-align:left; padding:40px 5vw 34px max(5vw,124px); box-shadow:none; animation:viewFadeIn 1s ease both}
 @media (max-width:760px){#sea-help-modal .waters-guide-card{padding-left:20px}}
-#sea-help-modal .guide-item{transition:opacity .8s ease, transform .8s ease, border-color .8s ease, box-shadow .8s ease}
+#sea-help-modal .guide-item{transition:opacity 1.2s ease, transform 1.2s ease, border-color 1.2s ease, box-shadow 1.2s ease}
 #sea-help-modal .guide-item.ghost{opacity:.15}
 #sea-help-modal .guide-item.spot{opacity:1; transform:scale(1.025); border-color:var(--gold); box-shadow:0 0 34px rgba(240,183,63,.22)}
 @keyframes bwHearth{0%,100%{color:inherit; text-shadow:none}14%,26%{color:#ffe9b0; text-shadow:0 0 14px rgba(240,183,63,.8)}}
@@ -617,14 +617,14 @@ body[data-theme="xmas"] .post-card, body[data-theme="xmas"] .post-composer{backg
 #lake-list{overflow-x:hidden}
 
 .waters-guide-card{width:min(700px,94vw); max-height:88vh; overflow:auto; text-align:left; padding:32px 32px 26px}
-.waters-guide-card h3{font-size:31px; text-align:center}
+.waters-guide-card h3{font-size:36px; text-align:center}
 .waters-guide-card .modal-sub{text-align:center}
-.waters-guide-intro{color:var(--cream); font-size:16.5px; line-height:1.6; margin:0 0 16px}
-.guide-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-.guide-item{background:rgba(21,13,32,.38); border:1px solid rgba(240,183,63,.38); border-radius:12px; padding:14px 15px}
-.guide-item b{display:block; color:var(--gold); font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:7px}
-.guide-item p{color:var(--cream); font-size:14.5px; line-height:1.55; margin:0}
-.waters-guide-law{margin-top:12px; border:1px solid rgba(255,209,102,.6); border-radius:12px; padding:14px 16px; color:#ffe9b0; font-size:15.5px; line-height:1.6; text-align:center}
+.waters-guide-intro{color:var(--cream); font-size:18px; line-height:1.65; margin:0 0 18px}
+.guide-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.guide-item{background:rgba(21,13,32,.38); border:1px solid rgba(240,183,63,.38); border-radius:12px; padding:20px 20px 18px; cursor:pointer}
+.guide-item b{display:block; color:var(--gold); font-family:var(--mono); font-size:15px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:8px}
+.guide-item p{color:var(--cream); font-size:16.5px; line-height:1.68; margin:0}
+.waters-guide-law{margin-top:14px; border:1px solid rgba(255,209,102,.6); border-radius:12px; padding:16px 18px; color:#ffe9b0; font-size:17px; line-height:1.65; text-align:center}
 @media (max-width:680px){.guide-grid{grid-template-columns:1fr}.waters-guide-card{padding:28px 20px 22px}}
 #river-create{display:none; gap:8px; flex-wrap:wrap; align-items:center; margin:-6px 0 16px; background:var(--panel); border:1px solid rgba(240,183,63,.4); border-radius:14px; padding:12px 14px}
 #river-create.open{display:flex}
@@ -1688,7 +1688,7 @@ html.kint-lock{overflow:hidden !important}
       <p>Every build that made <b>this website</b> — logged in the workshop where it happened, by the two who built it. Isaiah's ideas and calls; Lux's craft and memory. <i>Free creative. No Kragle.</i></p>
       <div class="bl-stats"><span>110 BUILDS ON THE PROJECT RECORD</span><span>THE ROAD TO “COMPLETE” · AND WHAT CAME AFTER</span><span>OCT 30 – NOV 9, 2026</span><span>ONE FILE · TWO BUILDERS</span></div>
       <button class="bl-replay" id="bl-replay" type="button">Re-open the workshop</button><button class="bl-replay bl-lanes-btn" id="bl-lanes" type="button">Lanes: 1</button><p class="bl-zap-hint">DOUBLE-CLICK OR DOUBLE-TAP ANYWHERE ON THIS PAGE — CALL THE LIGHTNING</p>
-      <div class="bl-vtabs" role="tablist" aria-label="Build Log editions"><button class="bl-vtab on" id="bl-tab-cog" type="button">⚙ The Workshop — Cog Edition</button><button class="bl-vtab" id="bl-tab-scroll" type="button">The Scroll — Lightning Edition</button></div>
+      <div class="bl-vtabs" role="tablist" aria-label="Build Log editions"><button class="bl-vtab on" id="bl-tab-cog" type="button">The Workshop — Cog Edition</button><button class="bl-vtab" id="bl-tab-scroll" type="button">The Scroll — Lightning Edition</button></div>
     </div>
     <div class="bl-entries" id="bl-ed-cog">
       <h2 class="bl-era">The First Night — the demo stack · Oct 30 · Builds 1–22</h2>
@@ -1850,16 +1850,19 @@ html.kint-lock{overflow:hidden !important}
   <div class="modal-card waters-guide-card" role="dialog" aria-modal="true" aria-labelledby="sea-help-title">
     <button class="modal-x" id="sea-help-close" aria-label="Close the Waters guide">✕</button>
     <h3 id="sea-help-title">How the Waters Work</h3>
-    <p class="modal-sub">The Sea, the Lakes, and the Rivers — in plain words.</p>
-    <p class="waters-guide-intro">The <b>Sea</b> is the whole ocean: every post lives there. <b>Lakes</b> and <b>Rivers</b> are smaller currents inside it — ways to gather around a topic or a crew. They organize posts; they never trap them, and they never erase them.</p>
+    <p class="modal-sub">Every button and corner of the Sea page, in order — no guessing.</p>
+    <p class="waters-guide-intro">The <b>Sea</b> is the whole ocean: every post lives there. <b>Lakes</b> and <b>Rivers</b> are smaller waters inside it — ways to gather around a topic or a crew. They organize posts; they never trap them, and they never erase them. Walk this guide from the top and you will know the whole page.</p>
     <div class="guide-grid">
-      <div class="guide-item"><b>🌊 The Sea</b><p>Tap <b>The Sea</b> to see everything. A post made inside a Lake still flows into the Sea and wears that Lake&rsquo;s name as a badge.</p></div>
-      <div class="guide-item"><b>🏞️ Lakes</b><p>A Lake is a member-made corner of the Sea. Dig one in the Lakes panel, join or leave with one tap. When you post, use <b>Post to:</b> to pour the post into a Lake.</p></div>
-      <div class="guide-item"><b>〰️ Rivers</b><p>A River bundles several Lakes into one stream. Tap a River to see only the posts from its Lakes, together. Tap <b>The Sea</b> to return to the whole ocean. And if someone bundles your lake into their river and you'd rather not be in it, open the river and tap ✕ leave beside your lake's name — your lake steps out, and every post stays in the Sea either way.</p></div>
-      <div class="guide-item"><b>✕ Deleting a bubble</b><p>Only a Lake&rsquo;s or River&rsquo;s owner can delete it. The ✕ asks twice — tap once, read, tap again — so a bubble never pops by accident.</p></div>
-      <div class="guide-item"><b>✉️ The farewell letter</b><p>When an owner deletes a Lake or River, everyone who joined it or posted in it gets an email: the bubble is gone, and here is what that means.</p></div>
-      <div class="guide-item"><b>◯ The water shapes</b><p>Step into a Lake and the water calms — one big circle breathes slowly, like a pond seen from above. Step into a River and the water stands up — one thin stream poured down the screen like slow gold, and the water behind it runs vertical too. No plankton live in a Lake or a River. The colors never change.</p></div>
+      <div class="guide-item"><b>🌊 1 · The Sea — the whole page</b><p>The Sea is the shared water: every post anyone makes lives here, newest first. The row of chips at the top is how you move: <b>The Sea</b> shows everything, <b>Saved by me</b> shows only the posts you saved, and a chip appears for every Lake and River so you can step into one. The thin meter down the right edge is the depth gauge — it fills as you scroll deeper. Reading is open to everyone; posting asks you to join or log in. <b>Phone:</b> the chips sit under the top bar and the Lakes and Rivers panels live under them. <b>PC:</b> Lakes and Rivers stand in banks beside the feed.</p></div>
+      <div class="guide-item"><b>✍️ 2 · Posting</b><p>The composer is the box at the top of the feed. Write your words, then press <b>Post</b>. A picture, GIF or video can ride inside the post: paste its link in the media line, or press <b>Upload</b> and pick the file. <b>Post to:</b> chooses the landing — The Sea for everyone, or one of your Lakes. A post poured into a Lake still appears in the Sea, wearing that Lake&rsquo;s name as a badge. <b>Phone and PC:</b> the same box, the same buttons; on phones it stretches full width above the feed.</p></div>
+      <div class="guide-item"><b>❤️ 3 · Reactions, comments, saves</b><p>Every post carries its own tools underneath. Tap a face to react — tap it again to take your reaction back. The gold bank holds picture reactions: tap one to react with that picture, or add your own picture to the bank for everyone. Comments live under the post: read the thread, write in the box, press Post. The ribbon saves the post into your <b>Saved by me</b>. Your own posts and your own comments carry a small ✕ — two taps delete them. Nobody can delete anybody else&rsquo;s words; that power does not exist here.</p></div>
+      <div class="guide-item"><b>🏞️ 4 · Lakes</b><p>A Lake is a member-made corner of the Sea — a topic, a crew, a show. In the Lakes panel, <b>Dig a lake</b> names a new one; <b>Join</b> and <b>Leave</b> are one tap. Tap a Lake&rsquo;s purple letter or its name to step in: the feed narrows to that Lake&rsquo;s posts only, and the water behind the page calms into one big round pond that breathes slowly and grows a little with every post poured in. Tap <b>The Sea</b> chip to step back out. Only the Lake&rsquo;s owner sees its ✕ Delete. <b>PC:</b> the panel is a bank beside the feed. <b>Phone:</b> it sits under the chips — same buttons, same order.</p></div>
+      <div class="guide-item"><b>〰️ 5 · Rivers</b><p>A River bundles several Lakes into one stream. In the Rivers panel, make a River and tick the Lakes it should carry. Tap the River&rsquo;s name or its letter to step in: the feed shows only the posts from those Lakes, together, and the water stands up into one gold stream running down the page. If someone bundles your Lake into their River and you would rather it was not there, open that River and tap <b>✕ leave</b> beside your Lake&rsquo;s name — it steps out cleanly, and nothing is lost. Only the River&rsquo;s owner can delete the River. <b>Phone and PC</b> work the same; on phones the panel sits under the chips.</p></div>
+      <div class="guide-item"><b>🚪 6 · The Ocean — BW Ocean, the museum</b><p>The Sea holds one special door: the exhibit card that opens <b>BW Ocean</b>, the museum across the water. That is where the curator — Isaiah — posts the one-of-one pieces: concert films, old photos, the deep archive. Visitors there can look, like, and comment; posting belongs to the curator alone. And whatever colors this site is wearing when you walk through — Halloween orange and black, Christmas red and green, or everyday plum and gold — follow you in and dress the Ocean the same. (The holiday colors only exist from September 30 to January 1.)</p></div>
+      <div class="guide-item"><b>✕ 7 · Deleting — the law of the waters</b><p>Deleting is owner-only, and it only ever removes a bubble. A Lake&rsquo;s or River&rsquo;s owner taps ✕, reads the warning — &ldquo;Sure? Posts stay in the Sea — tap again&rdquo; — and taps once more. Every post that was ever in the bubble stays in the Sea, untouched; the only way a post disappears is its own author deleting that post, in the Sea. When an owner deletes a Lake or River that other people joined or posted in, everyone in it receives a farewell email: the bubble is gone, and their posts are safe in the Sea.</p></div>
+      <div class="guide-item"><b>◯ 8 · The water itself</b><p>The water answers you back. Rest your pointer on the Sea — or tap it on a phone — and a blue wave rolls down the layers, then turquoise follows; leave it alone and it settles back to plum. Click or tap the water itself and tiny plankton wake up and glow; tap again and they sleep. Step into a Lake and the water goes calm and round. Step into a River and it stands up and runs fast. On Halloween and Christmas the water wears the season&rsquo;s colors too. No plankton live in a Lake or a River — they are Sea creatures.</p></div>
     </div>
+    <p class="modal-note" style="text-align:center; margin-top:14px">The cards light up one at a time on their own — or tap any card to hold it in the light and read as long as you like.</p>
     <div class="waters-guide-law"><b>The law of the waters:</b> deleting a Lake or a River removes only the bubble. <b>Every post stays in the Sea.</b> To remove a post, its owner deletes that post separately, in the Sea.</div>
     <p class="modal-note" style="text-align:center; margin-top:14px">What connects, remains.</p>
   </div>
@@ -3461,6 +3464,7 @@ window.__bwAuth = function(form){
         var av = document.createElement('div'); av.className = 'avatar lake-go'; av.textContent = (L.name || 'L').charAt(0).toUpperCase();
         av.title = 'See only ' + L.name + ' in the Sea';
         av.addEventListener('click', function(){ bwShowLake(id); });
+        bwIconApply(av, 'lake', id);
         var meta = document.createElement('div'); meta.className = 'meta';
         var bb = document.createElement('b'); bb.textContent = L.name;
         bb.className = 'lake-go'; bb.title = 'See only ' + L.name + ' in the Sea';
@@ -3482,6 +3486,10 @@ window.__bwAuth = function(form){
         });
         row.appendChild(jb);
         if(BW.user && L.owner === BW.user.id){
+          var ib = document.createElement('button'); ib.type = 'button'; ib.className = 'join-btn'; ib.style.marginLeft = '8px';
+          ib.textContent = 'Icon'; ib.title = 'Give ' + L.name + ' a picture — a PNG or GIF worn inside its circle';
+          ib.addEventListener('click', function(){ bwIconPick('lake', id, L.name); });
+          row.appendChild(ib);
           var db = document.createElement('button'); db.type = 'button'; db.className = 'join-btn'; db.style.marginLeft = '8px';
           db.textContent = '✕ Delete';
           db.title = 'Delete your lake — every post in it stays in the Sea';
@@ -3548,12 +3556,45 @@ window.__bwAuth = function(form){
         .catch(function(){ return 0; });
     }).catch(function(){ return 0; });
   }
+  /* TIER-2 BENCH (Nov 9): custom icons — the owner picks a PNG or
+     GIF and it is worn inside the water's circle. Bench storage is
+     this browser's local vault, keyed by water + id, so the icon
+     shows the moment it is picked; the publish-day upgrade is an
+     icon_url column so the picture follows the water everywhere. */
+  function bwIconGet(kind, id){ try{ return localStorage.getItem('bwicon-' + kind + '-' + id) || ''; }catch(e){ return ''; } }
+  function bwIconPick(kind, id, name){
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/png,image/gif,image/jpeg,image/webp';
+    inp.addEventListener('change', function(){
+      var f = inp.files && inp.files[0]; if(!f) return;
+      if(f.size > 1200 * 1024){ toast('That picture is too heavy for the icon vault (about 1.2 MB max) — a smaller PNG or GIF will fit.'); return; }
+      var rd = new FileReader();
+      rd.onload = function(){
+        try{ localStorage.setItem('bwicon-' + kind + '-' + id, String(rd.result)); }
+        catch(e){ toast('The icon vault in this browser is full — try a smaller picture.'); return; }
+        toast('Icon set — ' + name + ' wears it now.');
+        if(kind === 'lake') bwRenderLakes(); else bwRenderRivers();
+      };
+      rd.readAsDataURL(f);
+    });
+    inp.click();
+  }
+  function bwIconApply(av, kind, id){
+    var url = bwIconGet(kind, id);
+    if(!url) return;
+    av.textContent = '';
+    var im = document.createElement('img');
+    im.src = url; im.alt = '';
+    im.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;display:block';
+    av.appendChild(im);
+  }
   function bwArm(btn, label, fn){
-    if(btn.dataset.armed){ delete btn.dataset.armed; fn(); return; }
+    if(btn.dataset.armed){ delete btn.dataset.armed; btn.classList.remove('bw-armed'); fn(); return; }
     btn.dataset.armed = '1';
+    btn.classList.add('bw-armed'); /* FINAL FIXES — NO-CUTOFF LAW: the button grows to fit its whole warning */
     var old = btn.textContent;
     btn.textContent = label;
-    setTimeout(function(){ if(btn.dataset.armed){ delete btn.dataset.armed; btn.textContent = old; } }, 4500);
+    setTimeout(function(){ if(btn.dataset.armed){ delete btn.dataset.armed; btn.classList.remove('bw-armed'); btn.textContent = old; } }, 6500);
   }
   function bwDeleteLake(id, name, btn){
     bwArm(btn, 'Sure? Posts stay in the Sea — tap again', function(){
@@ -3627,6 +3668,11 @@ window.__bwAuth = function(form){
           toast('The river ' + R.name + ' is running — ' + R.lakes.length + (R.lakes.length === 1 ? ' lake' : ' lakes') + ' flowing through it. The Sea chip brings back the whole ocean.');
         });
         var row = document.createElement('div'); row.className = 'river-row';
+        var rav = document.createElement('div'); rav.className = 'avatar river-go'; rav.textContent = (R.name || 'R').charAt(0).toUpperCase();
+        rav.title = 'Run the Sea through ' + R.name; rav.style.cssText = 'cursor:pointer;flex:0 0 auto';
+        rav.addEventListener('click', function(){ ch.click(); });
+        bwIconApply(rav, 'river', id);
+        row.appendChild(rav);
         row.appendChild(ch);
         if(BW.user && R.owner === BW.user.id){
           var rd = document.createElement('button');
@@ -3635,6 +3681,11 @@ window.__bwAuth = function(form){
           rd.title = 'Delete your river ' + R.name + ' — its lakes and every post stay in the Sea';
           rd.addEventListener('click', function(){ bwDeleteRiver(id, R.name, rd); });
           row.appendChild(rd);
+          var rib = document.createElement('button');
+          rib.type = 'button'; rib.className = 'chip river-del'; rib.style.borderColor = 'rgba(240,183,63,.45)'; rib.style.color = 'var(--yellow)';
+          rib.textContent = 'Icon'; rib.title = 'Give ' + R.name + ' a picture — a PNG or GIF worn inside its circle';
+          rib.addEventListener('click', function(){ bwIconPick('river', id, R.name); });
+          row.appendChild(rib);
         }
         bar.insertBefore(row, nb);
       });
@@ -4688,6 +4739,16 @@ runners['sea-canvas'] = function(canvas, ctx, state){
     if(!running['sea-canvas']) return;
     var s = fitCanvas(canvas), W=s.w, H=s.h, t = now/1000;
     ctx.clearRect(0,0,W,H);
+    /* FINAL FIXES — RIVER SIZE + SPEED (Nov 9, 04:31): one shared
+       size unit for every river part. The animation itself is
+       PERFECT (his word) — only BIGGER: the pour lands just a tad
+       narrower than the post column it runs behind; and a bit
+       FASTER: river time runs at 1.3x. */
+    var riverUnitF = Math.max(12 * s.dpr, Math.min(W * 0.016, 24 * s.dpr));
+    var feedElF = document.getElementById('sea-feed');
+    var feedWF = feedElF ? feedElF.clientWidth * s.dpr : W * 0.6;
+    var riverBaseF = Math.max(riverUnitF, Math.min(feedWF * 0.36, W * 0.44));
+    var riverTF = t * 1.3;
     /* BUILD 98 — WATER MOODS (his design, Nov 7): the same canvas,
        the same colors (season pairs included) — only the SHAPE of
        the motion changes. Sea = the layered waves. Lake = the waves
@@ -4801,11 +4862,11 @@ runners['sea-canvas'] = function(canvas, ctx, state){
          river's light top layer, clipped by a wavy edge on BOTH
          sides (it used to run to the square screen edge), its waves
          calmed to half and its motion sped up: rivers are fast. */
-      var bandHalf110 = Math.max(12 * s.dpr, Math.min(W * 0.016, 24 * s.dpr)) * 1.35;
+      var bandHalf110 = Math.min(riverBaseF * 1.22, feedWF * 0.47); /* FINAL FIXES round 2: the band grows with the river but stays inside the post column — a little thicker than the stream, never a wall across the page */
       var edge110 = function(vy, side){
         return W / 2 + side * bandHalf110
-          + Math.sin(vy * 0.004 + t * 1.9) * 4.5 * s.dpr
-          + Math.sin(vy * 0.011 - t * 2.7) * 2 * s.dpr;
+          + Math.sin(vy * 0.004 + riverTF * 1.9) * 4.5 * s.dpr
+          + Math.sin(vy * 0.011 - riverTF * 2.7) * 2 * s.dpr;
       };
       ctx.save();
       ctx.beginPath();
@@ -4817,8 +4878,8 @@ runners['sea-canvas'] = function(canvas, ctx, state){
         ctx.beginPath(); ctx.moveTo(W, 0);
         for(var vy = 0; vy <= H; vy += 6){
           var vx = W / 2 + (L.base - 0.5) * 2 * bandHalf110 * 0.92
-            + Math.sin(vy * L.len * 2.2 + t * L.spd * 3.4) * W * L.amp * ampK * 0.55
-            + Math.sin(vy * L.len * 5.9 - t * L.spd * 2.6) * W * L.amp * 0.45 * ampK * 0.55;
+            + Math.sin(vy * L.len * 2.2 + riverTF * L.spd * 3.4) * W * L.amp * ampK * 0.55
+            + Math.sin(vy * L.len * 5.9 - riverTF * L.spd * 2.6) * W * L.amp * 0.45 * ampK * 0.55;
           ctx.lineTo(vx, vy);
         }
         ctx.lineTo(W, H); ctx.closePath();
@@ -4843,7 +4904,19 @@ runners['sea-canvas'] = function(canvas, ctx, state){
            the center is the middle of the visible window on phone
            and PC alike, and scrolling cannot drag it away. */
         var r110 = canvas.getBoundingClientRect();
-        var mid110 = (window.innerHeight || 800) * 0.5 - r110.top;
+        /* FINAL FIXES (Nov 9, 04:22 — his eyes: "center it to page
+           always... no matter how you scroll"): the center is read
+           from the VISUAL viewport — the rectangle the eye actually
+           sees. window.innerHeight lies on phones: the browser bar
+           shows and hides mid-scroll, and the old center walked
+           with it. visualViewport reports the true visible height
+           plus its offset from the layout top, so the pond's center
+           lands on the visible center at every scroll position,
+           phone and PC alike. Fallback = innerHeight. */
+        var vv110 = window.visualViewport;
+        var vh110 = vv110 ? vv110.height : (window.innerHeight || 800);
+        var vo110 = vv110 ? vv110.offsetTop : 0;
+        var mid110 = vo110 + vh110 * 0.5 - r110.top;
         var k110 = r110.height ? (H / r110.height) : s.dpr;
         return Math.max(0, Math.min(H, mid110 * k110));
       })();
@@ -4872,7 +4945,7 @@ runners['sea-canvas'] = function(canvas, ctx, state){
       var pondT102 = Math.min(1.45, 1.0 + 0.06 * pondN102);
       state.pondGrow += (pondT102 - state.pondGrow) * 0.03;
       var Rb = Math.min(W, H) * 0.385 * state.pondGrow * (1 + 0.06 * Math.sin(t * 0.10)); /* BUILD 110: the warp — bigger and smaller, very very slow (~63s a breath). The rim wiggle above is untouched. */
-      Rb = Math.min(Rb, W * 0.47, (window.innerHeight || 800) * 0.47);
+      Rb = Math.min(Rb, W * 0.47, (window.visualViewport ? window.visualViewport.height : (window.innerHeight || 800)) * s.dpr * 0.47); /* FINAL FIXES: this cap is device px, like Rb — CSS px here quietly halved the pond on retina screens */
       /* the rim itself is wavy — the waveform circle with the music
          off, way slower: three lazy swells travelling around the edge */
       var pondR = function(a){ return Rb * (1 + 0.028 * Math.sin(a * 3 + t * 0.22) + 0.018 * Math.sin(a * 5 - t * 0.16) + 0.012 * Math.sin(a * 8 + t * 0.10)); };
@@ -4939,13 +5012,13 @@ runners['sea-canvas'] = function(canvas, ctx, state){
          ripples on three quicker frequencies, so the ribbon reads
          as a fast wavy line, and the inner threads ripple faster
          too. */
-      var rBase = Math.max(12 * s.dpr, Math.min(W * 0.016, 24 * s.dpr)); /* BUILD 110: the stream carries more water — the light layer needed a body under it */
+      var rBase = riverBaseF; /* FINAL FIXES (Nov 9, 04:31): way bigger — landing just a tad narrower than the post boxes, his exact words */
       /* the pour leans gold, the way the forge's stream does — mixed
          from the water's own color so the seasons still run it */
       var pourRGB = [Math.round(moodRGB[0] + (255 - moodRGB[0]) * 0.38), Math.round(moodRGB[1] + (209 - moodRGB[1]) * 0.38), Math.round(moodRGB[2] + (102 - moodRGB[2]) * 0.38)];
       var pour = 'rgb(' + pourRGB[0] + ',' + pourRGB[1] + ',' + pourRGB[2] + ')';
-      var rCx = function(y){ return W / 2 + Math.sin(y * 0.0016 - t * 0.5) * W * 0.010; }; /* BUILD 110 (his call): ONE slow sine — a very, very thin S, and nothing else */
-      var rTh = function(y){ return rBase * (1 + 0.16 * Math.sin(y * 0.011 + t * 1.7) + 0.06 * Math.sin(y * 0.027 - t * 2.6) + 0.03 * Math.sin(y * 0.061 + t * 3.9)); }; /* BUILD 110: the edges calm — the wiggle lives in the centerline now */
+      var rCx = function(y){ return W / 2 + Math.sin(y * 0.0016 - riverTF * 0.5) * W * 0.010; }; /* BUILD 110 (his call): ONE slow sine — a very, very thin S, and nothing else */
+      var rTh = function(y){ return rBase * (1 + 0.16 * Math.sin(y * 0.011 + riverTF * 1.7) + 0.06 * Math.sin(y * 0.027 - riverTF * 2.6) + 0.03 * Math.sin(y * 0.061 + riverTF * 3.9)); }; /* BUILD 110: the edges calm — the wiggle lives in the centerline now */
       /* the pour itself: one filled ribbon, bulging and narrowing */
       ctx.beginPath();
       for(var ry = -24; ry <= H + 24; ry += 10){ var exL = rCx(ry) - rTh(ry); if(ry === -24) ctx.moveTo(exL, ry); else ctx.lineTo(exL, ry); }
@@ -4974,7 +5047,7 @@ runners['sea-canvas'] = function(canvas, ctx, state){
       [-0.38, 0.38].forEach(function(off){
         ctx.beginPath();
         for(var ry3 = -24; ry3 <= H + 24; ry3 += 9){
-          var xx3 = rCx(ry3) + rTh(ry3) * off + Math.sin(ry3 * 0.014 - t * 2.8 + off * 4) * 3 * s.dpr;
+          var xx3 = rCx(ry3) + rTh(ry3) * off + Math.sin(ry3 * 0.014 - riverTF * 2.8 + off * 4) * 3 * s.dpr;
           if(ry3 === -24) ctx.moveTo(xx3, ry3); else ctx.lineTo(xx3, ry3);
         }
         ctx.strokeStyle = pour;
@@ -7572,13 +7645,26 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
       }
     });
   }
+  function clearSpot(){
+    tourIdx = -1;
+    items.forEach(function(it){ it.classList.remove('spot', 'ghost'); });
+  }
   function startTour(){
     stopTour();
     spot(0);
-    tourTimer = setInterval(function(){ spot((tourIdx + 1) % items.length); }, 4200);
+    /* FINAL FIXES (Nov 9, guide overhaul): the tour walks SLOWLY —
+       nine seconds a card, so a first-timer can truly read — and
+       after one full walk it sets every card free: no ghosts, all
+       readable at once. From there the cards belong to the reader:
+       tap any one to hold it in the light, as long as you like. */
+    tourTimer = setInterval(function(){
+      var nx = tourIdx + 1;
+      if(nx >= items.length){ stopTour(); clearSpot(); return; }
+      spot(nx);
+    }, 9000);
   }
   function stopTour(){ if(tourTimer){ clearInterval(tourTimer); tourTimer = null; } }
-  items.forEach(function(it, j){ it.addEventListener('click', function(){ spot(j); stopTour(); tourTimer = setInterval(function(){ spot((tourIdx + 1) % items.length); }, 4200); }); });
+  items.forEach(function(it, j){ it.addEventListener('click', function(){ stopTour(); spot(j); }); });
   function open(){
     modal.hidden = false;
     ['sea-help-title'].forEach(function(id){ var el = document.getElementById(id); if(el){ el.classList.add('hearth-live'); hearthLetters(el, 60); } });
@@ -7803,7 +7889,25 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
 
 <style>
 /* ============ BUILD 110 BENCH — lake tap targets, lane reader,
-   scroll lightning, sea curtain, waters polish ============ */
+   scroll lightning, waters polish ============ */
+/* ============ FINAL FIXES — NO-CUTOFF LAW (Nov 9, 04:23) ============
+   No words cut off anywhere: an ARMED delete button grows to fit
+   its whole warning — wrapping and stretching instead of clipping
+   inside the little pill it was born in. River names in the panel
+   read whole, never trailed off. Toasts keep their whole sentence. */
+button.bw-armed{white-space:normal !important; height:auto !important; min-height:36px;
+  line-height:1.35 !important; padding:9px 14px !important; max-width:min(340px,82vw);
+  overflow:visible !important; text-align:center}
+#river-bar .river-chip{white-space:normal; overflow:visible; text-overflow:clip; overflow-wrap:anywhere}
+/* round 3: inside the water panels, an armed button wraps taller
+   within the panel — never wider than the panel itself */
+#river-bar button.bw-armed, .lakes-panel button.bw-armed{max-width:100%}
+#river-bar .river-row:has(button.bw-armed){flex-wrap:wrap}
+/* round 5: river rows wrap instead of crushing — a river's name
+   breaks at word edges and never stacks letter by letter */
+#river-bar .river-row{flex-wrap:wrap}
+#river-bar .river-chip{overflow-wrap:break-word; min-width:84px}
+#toast{max-width:min(580px,92vw); white-space:normal; overflow-wrap:break-word; line-height:1.45}
 .lakes-panel .lake-go{cursor:pointer}
 .lakes-panel .avatar.lake-go{transition:box-shadow .2s ease}
 .lakes-panel .avatar.lake-go:hover{box-shadow:0 0 0 2px rgba(240,183,63,.7)}
@@ -7859,82 +7963,6 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
   background-repeat:repeat-y; background-size:15px 96px; background-position:center top;
   filter:drop-shadow(0 0 5px rgba(240,183,63,.65))}
 @media (max-width:760px){ .bls-bolt{opacity:.7; left:6px} }
-/* ============ THE SEA CURTAIN (his spec, Nov 9) ============
-   The Ocean's cloth, more curtain: the pleats gather and tighten
-   toward the edges, the hem lags and sways, the whole thing settles
-   soft — and it takes a breath longer than the Ocean's 1.6s. */
-#sea-curtain{position:fixed; inset:0; z-index:380; overflow:hidden;
-  transition:opacity .35s ease}
-#sea-curtain[hidden]{display:none}
-#sea-curtain.done{opacity:0; pointer-events:none}
-#sea-curtain .sc-panel{position:absolute; top:0; bottom:0; width:50.6%;
-  background:
-    linear-gradient(180deg, rgba(255,209,102,.05), rgba(0,0,0,0) 30%),
-    repeating-linear-gradient(90deg,
-      rgba(8,3,18,.42) 0px, rgba(46,29,79,.12) 14px, rgba(255,232,190,.07) 27px,
-      rgba(23,13,41,0) 42px, rgba(8,3,18,.34) 58px, rgba(23,13,41,0) 72px),
-    linear-gradient(160deg, #241645, #1f1433 55%, #170d29);
-  background-size:auto, 144px 100%, auto}
-#sea-curtain .sc-panel::before{content:""; position:absolute; inset:0; pointer-events:none;
-  background:
-    repeating-linear-gradient(45deg, rgba(240,183,63,.055) 0 2px, transparent 2px 26px),
-    repeating-linear-gradient(-45deg, rgba(240,183,63,.055) 0 2px, transparent 2px 26px),
-    repeating-linear-gradient(0deg, rgba(255,232,190,.028) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(90deg, rgba(8,3,18,.16) 0 1px, transparent 1px 5px)}
-#sea-curtain .sc-l{left:0; transform-origin:left center;
-  box-shadow:inset -18px 0 34px -18px rgba(240,183,63,.35), inset 0 0 90px rgba(0,0,0,.55)}
-#sea-curtain .sc-r{right:0; transform-origin:right center;
-  box-shadow:inset 18px 0 34px -18px rgba(240,183,63,.35), inset 0 0 90px rgba(0,0,0,.55)}
-#sea-curtain .sc-hem{position:absolute; left:0; right:0; bottom:0; height:120px; pointer-events:none;
-  transform-origin:top center;
-  background:
-    repeating-linear-gradient(90deg, rgba(240,183,63,.5) 0 2px, transparent 2px 9px) bottom / 100% 26px no-repeat,
-    linear-gradient(180deg, transparent, rgba(240,183,63,.16) 62%, rgba(240,183,63,.05));
-  border-top:2px solid rgba(240,183,63,.45)}
-#sea-curtain .sc-seam{position:absolute; left:50%; top:0; bottom:0; width:3px; margin-left:-1.5px;
-  background:linear-gradient(180deg, rgba(255,209,102,.15), rgba(255,209,102,.85) 50%, rgba(255,209,102,.15));
-  animation:scBreath 4.2s ease-in-out infinite; pointer-events:none}
-@keyframes scBreath{0%,100%{opacity:.45; box-shadow:0 0 12px 2px rgba(240,183,63,.25)}
-  50%{opacity:1; box-shadow:0 0 30px 8px rgba(240,183,63,.5)}}
-#sea-curtain .sc-breath{position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(ellipse 46% 62% at 50% 50%, rgba(240,183,63,.13), rgba(240,183,63,0) 70%);
-  animation:scGlow 4.2s ease-in-out infinite}
-@keyframes scGlow{0%,100%{opacity:.35} 50%{opacity:.9}}
-#sea-curtain .sc-medal{position:absolute; left:50%; top:50%; width:92px; height:92px; margin:-46px 0 0 -46px;
-  border-radius:50%; border:2px solid var(--gold); color:var(--yellow);
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--serif); font-size:30px; font-style:italic; font-weight:700;
-  background:radial-gradient(circle at 50% 38%, #241645, #1f1433 75%);
-  box-shadow:0 0 26px rgba(240,183,63,.35), inset 0 0 18px rgba(0,0,0,.5);
-  animation:scBreath 4.2s ease-in-out infinite; pointer-events:none}
-#sea-curtain.open .sc-seam{opacity:0; transition:opacity .3s ease; animation:none}
-#sea-curtain.open .sc-breath{opacity:0; transition:opacity .4s ease; animation:none}
-#sea-curtain.open .sc-medal{opacity:0; transform:scale(1.07); transition:opacity .45s ease, transform .45s ease; animation:none}
-#sea-curtain.open .sc-l{animation:scOpenL 2.3s cubic-bezier(.55,.06,.16,1) forwards}
-#sea-curtain.open .sc-r{animation:scOpenR 2.3s cubic-bezier(.55,.06,.16,1) forwards}
-#sea-curtain.open .sc-hem{animation:scHem 2.3s ease-out}
-@keyframes scOpenL{
-  0%{transform:translateX(0) scaleX(1) rotate(0deg); background-size:auto, 144px 100%, auto}
-  30%{transform:translateX(-34%) scaleX(.78) rotate(-.18deg); background-size:auto, 104px 100%, auto}
-  58%{transform:translateX(-72%) scaleX(.38) rotate(-.45deg); background-size:auto, 52px 100%, auto}
-  78%{transform:translateX(-94%) scaleX(.20) rotate(-.7deg); background-size:auto, 36px 100%, auto}
-  88%{transform:translateX(-99.5%) scaleX(.165) rotate(-.85deg); background-size:auto, 33px 100%, auto}
-  94%{transform:translateX(-96.8%) scaleX(.195) rotate(-.55deg); background-size:auto, 37px 100%, auto}
-  100%{transform:translateX(-97.6%) scaleX(.182) rotate(-.62deg); background-size:auto, 35px 100%, auto}}
-@keyframes scOpenR{
-  0%{transform:translateX(0) scaleX(1) rotate(0deg); background-size:auto, 144px 100%, auto}
-  30%{transform:translateX(34%) scaleX(.78) rotate(.18deg); background-size:auto, 104px 100%, auto}
-  58%{transform:translateX(72%) scaleX(.38) rotate(.45deg); background-size:auto, 52px 100%, auto}
-  78%{transform:translateX(94%) scaleX(.20) rotate(.7deg); background-size:auto, 36px 100%, auto}
-  88%{transform:translateX(99.5%) scaleX(.165) rotate(.85deg); background-size:auto, 33px 100%, auto}
-  94%{transform:translateX(96.8%) scaleX(.195) rotate(.55deg); background-size:auto, 37px 100%, auto}
-  100%{transform:translateX(97.6%) scaleX(.182) rotate(.62deg); background-size:auto, 35px 100%, auto}}
-@keyframes scHem{
-  0%{transform:rotate(0deg) translateX(0)}
-  30%{transform:rotate(-1.7deg) translateX(-4px)}
-  55%{transform:rotate(1.2deg) translateX(3px)}
-  76%{transform:rotate(-.6deg) translateX(-1px)}
-  100%{transform:rotate(0deg) translateX(0)}}
 </style>
 <script>
 /* ============ BUILD 110 BENCH JS ============ */
@@ -8025,73 +8053,19 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
     bolt.className = 'bls-bolt'; bolt.setAttribute('aria-hidden', 'true');
     scrollPanel.appendChild(bolt);
   }
-  /* ---------- the Sea curtain ---------- */
-  var scEl = null, scBusy = false, scTimers = [], scAC = null;
-  function scWhoosh(){
-    try{
-      var C = window.AudioContext || window.webkitAudioContext; if(!C) return;
-      scAC = scAC || new C();
-      if(scAC.state === 'suspended') scAC.resume();
-      var t = scAC.currentTime, dur = 2.1;
-      var buf = scAC.createBuffer(1, Math.floor(scAC.sampleRate * dur), scAC.sampleRate);
-      var d = buf.getChannelData(0), lp = 0;
-      for(var i = 0; i < d.length; i++){ var w = Math.random() * 2 - 1; lp += 0.08 * (w - lp); d[i] = lp * 2.4; }
-      var srcN = scAC.createBufferSource(); srcN.buffer = buf;
-      var f = scAC.createBiquadFilter(); f.type = 'lowpass'; f.Q.value = 0.6;
-      f.frequency.setValueAtTime(420, t);
-      f.frequency.linearRampToValueAtTime(980, t + 0.5);
-      f.frequency.exponentialRampToValueAtTime(240, t + dur);
-      var g = scAC.createGain();
-      g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.5, t + 0.45);
-      g.gain.setValueAtTime(0.5, t + 1.2);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      srcN.connect(f); f.connect(g); g.connect(scAC.destination);
-      srcN.start(t); srcN.stop(t + dur + 0.05);
-    }catch(e){}
-  }
-  function scBuild(){
-    if(scEl) return scEl;
-    scEl = document.createElement('div');
-    scEl.id = 'sea-curtain'; scEl.hidden = true;
-    scEl.setAttribute('aria-hidden', 'true');
-    scEl.innerHTML = '<div class="sc-panel sc-l"><i class="sc-hem"></i></div>'
-      + '<div class="sc-panel sc-r"><i class="sc-hem"></i></div>'
-      + '<div class="sc-breath"></div><div class="sc-seam"></div><div class="sc-medal">BW</div>';
-    document.body.appendChild(scEl);
-    scEl.addEventListener('click', function(){ scFinish(true); });
-    return scEl;
-  }
-  function scFinish(skip){
-    if(!scEl || scEl.hidden){ scBusy = false; return; }
-    scTimers.forEach(clearTimeout); scTimers = [];
-    scEl.classList.add('done');
-    setTimeout(function(){
-      scEl.hidden = true; scEl.classList.remove('open', 'done'); scBusy = false;
-    }, skip ? 60 : 380);
-  }
-  function bwSeaCurtain(){
-    var el = scBuild();
-    if(scBusy) return;
-    scBusy = true;
-    el.hidden = false;
-    el.classList.remove('open', 'done');
-    void el.offsetWidth;
-    scWhoosh();
-    requestAnimationFrame(function(){ el.classList.add('open'); });
-    scTimers.push(setTimeout(function(){ scFinish(false); }, 2450));
-  }
-  /* entering the Sea = the room gaining its active class; watch the
-     room itself, so the curtain never leans on anyone's internals */
-  var seaViewEl = document.getElementById('view-sea');
-  if(seaViewEl && 'MutationObserver' in window){
-    var seaWasActive = seaViewEl.classList.contains('active');
-    new MutationObserver(function(){
-      var now = seaViewEl.classList.contains('active');
-      if(now && !seaWasActive){ try{ bwSeaCurtain(); }catch(e){} }
-      seaWasActive = now;
-    }).observe(seaViewEl, { attributes: true, attributeFilter: ['class'] });
-  }
+  /* ---------- FINAL FIXES: the theme follows you into the Ocean ----------
+     Whatever colors the site is wearing when the Ocean door is
+     tapped — Halloween, Christmas, or plain plum-and-gold — ride
+     across the link as ?theme=, and the Ocean dresses the same.
+     Rewritten at click time (capture phase), so the toggle's
+     current word is always the one that travels. */
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="bw-ocean"]') : null;
+    if(!a) return;
+    var th = document.body.getAttribute('data-theme');
+    var base = 'https://isaiahtobola.github.io/bw-ocean/';
+    a.setAttribute('href', (th === 'halloween' || th === 'xmas') ? (base + '?theme=' + th) : base);
+  }, true);
   /* ---------- waters polish: a quiet-lake note ---------- */
   function bwWatersEmptyNote(){
     var feed = document.getElementById('sea-feed');
