@@ -420,6 +420,15 @@ body.first-load .christmas-quote{animation:quoteBlurIn 5s ease-out .9s both}
    themed panel + gold, so the whole Sea dresses at once. */
 body[data-theme="halloween"] .post-card, body[data-theme="halloween"] .post-composer{background:var(--panel); border-color:var(--gold)}
 body[data-theme="xmas"] .post-card, body[data-theme="xmas"] .post-composer{background:var(--panel); border-color:var(--gold)}
+/* FIX 7 (his Halloween screenshot, Nov 9): the Sea's BOXES theme
+   too — the BW Ocean + Completion Filter doors, the File Sharing
+   Waves banner and the Rivers/Lakes panels were still plum while
+   everything around them wore the season. They ride the same
+   designated theme colors now; normal days keep their plum. */
+body[data-theme="halloween"] .door-1, body[data-theme="xmas"] .door-1{background:linear-gradient(150deg, var(--panel2), var(--panel))}
+body[data-theme="halloween"] .door-2, body[data-theme="xmas"] .door-2{background:linear-gradient(150deg, var(--plum-mid), var(--panel2))}
+body[data-theme="halloween"] .sea-note, body[data-theme="xmas"] .sea-note{background:linear-gradient(140deg, var(--panel2), var(--panel)); border-color:var(--gold)}
+body[data-theme="halloween"] .side-panel, body[data-theme="xmas"] .side-panel{background:var(--panel); border-color:var(--gold)}
 .post-card:hover{border-color:var(--gold); box-shadow:0 0 0 1px rgba(240,183,63,.35), 0 14px 34px rgba(0,0,0,.4)}
 .post-head{display:flex; align-items:center; gap:12px; margin-bottom:12px}
 .avatar{
@@ -565,7 +574,7 @@ body[data-theme="xmas"] .post-card, body[data-theme="xmas"] .post-composer{backg
 .join-btn:hover{background:var(--gold); color:var(--ink)}
 /* 97d — THE LEFT MENU RAIL: the PAGES-bar's twin, standing on the
    left edge of every page, carrying the menus */
-.mrail{position:fixed; left:14px; top:232px; z-index:940} /* 97g: rail parks just under the header bar (header = 44+132+44+2 = 222px) so it never blocks the sun — his call, Nov 7 */
+.mrail{position:absolute; left:14px; top:232px; z-index:940} /* 97g: rail parks just under the header bar (header = 44+132+44+2 = 222px) so it never blocks the sun — his call, Nov 7 */
 .mrail-btn{display:flex; align-items:center; gap:9px; background:rgba(21,13,32,.92); border:1px solid rgba(240,183,63,.55); color:var(--cream); border-radius:999px; padding:10px 16px; font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer; backdrop-filter:blur(6px); box-shadow:0 10px 26px rgba(0,0,0,.45)}
 .mrail-btn:hover{border-color:var(--gold); color:var(--yellow)}
 .mrail-btn .mr-caret{color:var(--gold); font-size:11px; transition:transform .25s}
@@ -747,7 +756,7 @@ body[data-theme="xmas"] .post-card, body[data-theme="xmas"] .post-composer{backg
 .smith-note{padding-top:28px; padding-bottom:10px}
 .smith-note h3{color:var(--gold); font-size:22px; margin-bottom:8px}
 .smith-note p{color:var(--muted); font-size:16.5px; line-height:1.65; margin-bottom:10px; max-width:72ch}
-#bw-tutor{position:fixed; inset:0; z-index:80; display:flex; align-items:center; justify-content:center; padding:22px;
+#bw-tutor{position:fixed; inset:0; z-index:1200; display:flex; align-items:center; justify-content:center; padding:22px;
   background:rgba(16,8,28,.72); opacity:0; pointer-events:none; transition:opacity .5s ease}
 #bw-tutor.show{opacity:1; pointer-events:auto}
 #bw-tutor .tcard{max-width:520px; width:100%; background:rgba(31,20,51,.97); border:1px solid rgba(240,183,63,.65);
@@ -815,7 +824,7 @@ body[data-theme="xmas"] .post-card, body[data-theme="xmas"] .post-composer{backg
 
 /* ============ LOGIN MODAL (mirrors his Wix member gate) ============ */
 .modal-backdrop{
-  position:fixed; inset:0; z-index:90; background:rgba(13,7,22,.78);
+  position:fixed; inset:0; z-index:1200; background:rgba(13,7,22,.78);
   backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:20px;
 }
 .modal-backdrop[hidden]{display:none}
@@ -1205,7 +1214,7 @@ html.kint-lock{overflow:hidden !important}
 .bl-interlude p b{color:var(--yellow)}
 .bl-note{max-width:820px; margin:22px auto 6px; text-align:center; color:var(--muted); font-size:.85rem; font-style:italic}
 /* ---- the workshop gate: cogs turn, doors swing open ---- */
-#bl-gate{position:fixed; inset:0; z-index:300; overflow:hidden}
+#bl-gate{position:fixed; inset:0; z-index:1150; overflow:hidden}
 #bl-gate[hidden]{display:none}
 .blg-door{position:absolute; top:0; bottom:0; width:50.5%; background:
   repeating-linear-gradient(90deg, rgba(255,255,255,.032) 0 3px, rgba(0,0,0,.055) 3px 5px, transparent 5px 9px),
@@ -1363,14 +1372,14 @@ html.kint-lock{overflow:hidden !important}
     <div class="nav-more" id="nav-more">
       <button class="nav-btn" id="more-btn" aria-haspopup="true" aria-expanded="false">More ▾</button>
       <div class="more-menu" role="menu">
-        <button data-view="hub">◉ BW Hub</button>
-        <button data-view="join">✦ Join</button>
-        <button data-view="files">▤ File Share</button>
+        <button data-view="hub">BW Hub</button>
+        <button data-view="join">Join</button>
+        <button data-view="files">File Share</button>
         <button data-view="kintsugi">Kintsugi</button>
-        <button data-view="buildlog">⚙ Build Log</button>
+        <button data-view="buildlog">Build Log</button>
       </div>
     </div>
-    <button class="nav-btn" id="holiday-btn" type="button" title="Cycle the season: Normal → Halloween → Christmas → Normal"><span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label"><i class="h-emo">🎄</i> Happy Holidays</span></span></button>
+    <button class="nav-btn" id="holiday-btn" type="button" title="Cycle the season: Normal → Halloween → Christmas → Normal"><span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label">Happy Holidays</span></span></button>
   </div>
 </nav>
 
@@ -1537,7 +1546,7 @@ html.kint-lock{overflow:hidden !important}
             <div class="feed">
         <div class="sea-banks-m" id="sea-banks-m" hidden></div>
         <div class="sea-note"><b>Share, save, and react to each other's files</b> — save SFX, images, PNGs, and GIFs to your own PC!<span class="sea-note-sign">— BW File Sharing Waves</span></div>
-        <div class="feed-chips" id="lake-chips"><button class="chip active" id="chip-all" type="button">The Sea</button><button class="chip" id="chip-saved" type="button">🔖 Saved by me</button><button class="chip sea-help-open" id="sea-help-btn" type="button" aria-haspopup="dialog" aria-controls="sea-help-modal">Waters guide</button></div>
+        <div class="feed-chips" id="lake-chips"><button class="chip active" id="chip-all" type="button">The Sea</button><button class="chip" id="chip-saved" type="button">Saved by me</button><button class="chip sea-help-open" id="sea-help-btn" type="button" aria-haspopup="dialog" aria-controls="sea-help-modal">Waters guide</button></div>
 <div class="river-members" id="river-members" hidden></div>
         <div class="post-composer">
           <div class="avatar">B</div>
@@ -1581,7 +1590,7 @@ html.kint-lock{overflow:hidden !important}
       <p>Public · brand new · the front porch of Broken World</p>
     </div>
     <div class="members-strip">
-      <span class="member-chip more" id="members-strip-note">✦ No members yet — be the first through the door</span><button class="member-join-btn" type="button" data-view="join">Join Broken World</button>
+      <span class="member-chip more" id="members-strip-note">No members yet — be the first through the door</span><button class="member-join-btn" type="button" data-view="join">Join Broken World</button>
     </div>
     <div class="hub-tabs" role="tablist" aria-label="BW Hub sections">
       <button class="hub-tab-btn active" data-hubtab="discussion">Discussion</button>
@@ -1873,14 +1882,14 @@ html.kint-lock{overflow:hidden !important}
     <p class="modal-sub">Every button and corner of the Sea page, in order — no guessing.</p>
     <p class="waters-guide-intro">The <b>Sea</b> is the whole ocean: every post lives there. <b>Lakes</b> and <b>Rivers</b> are smaller waters inside it — ways to gather around a topic or a crew. They organize posts; they never trap them, and they never erase them. Walk this guide from the top and you will know the whole page.</p>
     <div class="guide-grid">
-      <div class="guide-item"><b>🌊 1 · The Sea — the whole page</b><p>The Sea is the shared water: every post anyone makes lives here, newest first. The row of chips at the top is how you move: <b>The Sea</b> shows everything, <b>Saved by me</b> shows only the posts you saved, and a chip appears for every Lake and River so you can step into one. The thin meter down the right edge is the depth gauge — it fills as you scroll deeper. Reading is open to everyone; posting asks you to join or log in. <b>Phone:</b> the chips sit under the top bar and the Lakes and Rivers panels live under them. <b>PC:</b> Lakes and Rivers stand in banks beside the feed.</p></div>
-      <div class="guide-item"><b>✍️ 2 · Posting</b><p>The composer is the box at the top of the feed. Write your words, then press <b>Post</b>. A picture, GIF or video can ride inside the post: paste its link in the media line, or press <b>Upload</b> and pick the file. <b>Post to:</b> chooses the landing — The Sea for everyone, or one of your Lakes. A post poured into a Lake still appears in the Sea, wearing that Lake&rsquo;s name as a badge. <b>Phone and PC:</b> the same box, the same buttons; on phones it stretches full width above the feed.</p></div>
-      <div class="guide-item"><b>❤️ 3 · Reactions, comments, saves</b><p>Every post carries its own tools underneath. Tap a face to react — tap it again to take your reaction back. The gold bank holds picture reactions: tap one to react with that picture, or add your own picture to the bank for everyone. Comments live under the post: read the thread, write in the box, press Post. The ribbon saves the post into your <b>Saved by me</b>. Your own posts and your own comments carry a small ✕ — two taps delete them. Nobody can delete anybody else&rsquo;s words; that power does not exist here.</p></div>
-      <div class="guide-item"><b>🏞️ 4 · Lakes</b><p>A Lake is a member-made corner of the Sea — a topic, a crew, a show. In the Lakes panel, <b>Dig a lake</b> names a new one; <b>Join</b> and <b>Leave</b> are one tap. Tap a Lake&rsquo;s purple letter or its name to step in: the feed narrows to that Lake&rsquo;s posts only, and the water behind the page calms into one big round pond that breathes slowly and grows a little with every post poured in. Tap <b>The Sea</b> chip to step back out. Only the Lake&rsquo;s owner sees its ✕ Delete. <b>PC:</b> the panel is a bank beside the feed. <b>Phone:</b> it sits under the chips — same buttons, same order.</p></div>
-      <div class="guide-item"><b>〰️ 5 · Rivers</b><p>A River bundles several Lakes into one stream. In the Rivers panel, make a River and tick the Lakes it should carry. Tap the River&rsquo;s name or its letter to step in: the feed shows only the posts from those Lakes, together, and the water stands up into one gold stream running down the page. If someone bundles your Lake into their River and you would rather it was not there, open that River and tap <b>✕ leave</b> beside your Lake&rsquo;s name — it steps out cleanly, and nothing is lost. Only the River&rsquo;s owner can delete the River. <b>Phone and PC</b> work the same; on phones the panel sits under the chips.</p></div>
-      <div class="guide-item"><b>🚪 6 · The Ocean — BW Ocean, the museum</b><p>The Sea holds one special door: the exhibit card that opens <b>BW Ocean</b>, the museum across the water. That is where the curator — Isaiah — posts the one-of-one pieces: concert films, old photos, the deep archive. Visitors there can look, like, and comment; posting belongs to the curator alone. And whatever colors this site is wearing when you walk through — Halloween orange and black, Christmas red and green, or everyday plum and gold — follow you in and dress the Ocean the same. (The holiday colors only exist from September 30 to January 1.)</p></div>
-      <div class="guide-item"><b>✕ 7 · Deleting — the law of the waters</b><p>Deleting is owner-only, and it only ever removes a bubble. A Lake&rsquo;s or River&rsquo;s owner taps ✕, reads the warning — &ldquo;Sure? Posts stay in the Sea — tap again&rdquo; — and taps once more. Every post that was ever in the bubble stays in the Sea, untouched; the only way a post disappears is its own author deleting that post, in the Sea. When an owner deletes a Lake or River that other people joined or posted in, everyone in it receives a farewell email: the bubble is gone, and their posts are safe in the Sea.</p></div>
-      <div class="guide-item"><b>◯ 8 · The water itself</b><p>The water answers you back. Rest your pointer on the Sea — or tap it on a phone — and a blue wave rolls down the layers, then turquoise follows; leave it alone and it settles back to plum. Click or tap the water itself and tiny plankton wake up and glow; tap again and they sleep. Step into a Lake and the water goes calm and round. Step into a River and it stands up and runs fast. On Halloween and Christmas the water wears the season&rsquo;s colors too. No plankton live in a Lake or a River — they are Sea creatures.</p></div>
+      <div class="guide-item"><b>1 · The Sea — the whole page</b><p>The Sea is the shared water: every post anyone makes lives here, newest first. The row of chips at the top is how you move: <b>The Sea</b> shows everything, <b>Saved by me</b> shows only the posts you saved, and a chip appears for every Lake and River so you can step into one. The thin meter down the right edge is the depth gauge — it fills as you scroll deeper. Reading is open to everyone; posting asks you to join or log in. <b>Phone:</b> the chips sit under the top bar and the Lakes and Rivers panels live under them. <b>PC:</b> Lakes and Rivers stand in banks beside the feed.</p></div>
+      <div class="guide-item"><b>2 · Posting</b><p>The composer is the box at the top of the feed. Write your words, then press <b>Post</b>. A picture, GIF or video can ride inside the post: paste its link in the media line, or press <b>Upload</b> and pick the file. <b>Post to:</b> chooses the landing — The Sea for everyone, or one of your Lakes. A post poured into a Lake still appears in the Sea, wearing that Lake&rsquo;s name as a badge. <b>Phone and PC:</b> the same box, the same buttons; on phones it stretches full width above the feed.</p></div>
+      <div class="guide-item"><b>3 · Reactions, comments, saves</b><p>Every post carries its own tools underneath. Tap a face to react — tap it again to take your reaction back. The gold bank holds picture reactions: tap one to react with that picture, or add your own picture to the bank for everyone. Comments live under the post: read the thread, write in the box, press Post. The ribbon saves the post into your <b>Saved by me</b>. Your own posts and your own comments carry a small ✕ — two taps delete them. Nobody can delete anybody else&rsquo;s words; that power does not exist here.</p></div>
+      <div class="guide-item"><b>4 · Lakes</b><p>A Lake is a member-made corner of the Sea — a topic, a crew, a show. In the Lakes panel, <b>Dig a lake</b> names a new one; <b>Join</b> and <b>Leave</b> are one tap. Tap a Lake&rsquo;s purple letter or its name to step in: the feed narrows to that Lake&rsquo;s posts only, and the water behind the page calms into one big round pond that breathes slowly and grows a little with every post poured in. Tap <b>The Sea</b> chip to step back out. Only the Lake&rsquo;s owner sees its ✕ Delete. <b>PC:</b> the panel is a bank beside the feed. <b>Phone:</b> it sits under the chips — same buttons, same order.</p></div>
+      <div class="guide-item"><b>5 · Rivers</b><p>A River bundles several Lakes into one stream. In the Rivers panel, make a River and tick the Lakes it should carry. Tap the River&rsquo;s name or its letter to step in: the feed shows only the posts from those Lakes, together, and the water stands up into one gold stream running down the page. If someone bundles your Lake into their River and you would rather it was not there, open that River and tap <b>✕ leave</b> beside your Lake&rsquo;s name — it steps out cleanly, and nothing is lost. Only the River&rsquo;s owner can delete the River. <b>Phone and PC</b> work the same; on phones the panel sits under the chips.</p></div>
+      <div class="guide-item"><b>6 · The Ocean — BW Ocean, the museum</b><p>The Sea holds one special door: the exhibit card that opens <b>BW Ocean</b>, the museum across the water. That is where the curator — Isaiah — posts the one-of-one pieces: concert films, old photos, the deep archive. Visitors there can look, like, and comment; posting belongs to the curator alone. And whatever colors this site is wearing when you walk through — Halloween orange and black, Christmas red and green, or everyday plum and gold — follow you in and dress the Ocean the same. (The holiday colors only exist from September 30 to January 1.)</p></div>
+      <div class="guide-item"><b>7 · Deleting — the law of the waters</b><p>Deleting is owner-only, and it only ever removes a bubble. A Lake&rsquo;s or River&rsquo;s owner taps ✕, reads the warning — &ldquo;Sure? Posts stay in the Sea — tap again&rdquo; — and taps once more. Every post that was ever in the bubble stays in the Sea, untouched; the only way a post disappears is its own author deleting that post, in the Sea. When an owner deletes a Lake or River that other people joined or posted in, everyone in it receives a farewell email: the bubble is gone, and their posts are safe in the Sea.</p></div>
+      <div class="guide-item"><b>8 · The water itself</b><p>The water answers you back. Rest your pointer on the Sea — or tap it on a phone — and a blue wave rolls down the layers, then turquoise follows; leave it alone and it settles back to plum. Click or tap the water itself and tiny plankton wake up and glow; tap again and they sleep. Step into a Lake and the water goes calm and round. Step into a River and it stands up and runs fast. On Halloween and Christmas the water wears the season&rsquo;s colors too. No plankton live in a Lake or a River — they are Sea creatures.</p></div>
     </div>
     <p class="modal-note" style="text-align:center; margin-top:14px">The cards light up one at a time on their own — or tap any card to hold it in the light and read as long as you like.</p>
     <div class="waters-guide-law"><b>The law of the waters:</b> deleting a Lake or a River removes only the bubble. <b>Every post stays in the Sea.</b> To remove a post, its owner deletes that post separately, in the Sea.</div>
@@ -2397,7 +2406,7 @@ function renderFiles(){
       saveFiles(list); renderFiles();
     });
     var acts = document.createElement('span'); acts.className = 'row-actions';
-    var dl = document.createElement('button'); dl.className = 'dl-btn'; dl.textContent = '⬇ Get';
+    var dl = document.createElement('button'); dl.className = 'dl-btn'; dl.textContent = 'Get';
     dl.addEventListener('click', function(e){
       e.stopPropagation();
       var url = fileUrls[f.id] || (f.key ? bwWorkerGet(f) : null);
@@ -2432,7 +2441,7 @@ function renderFiles(){
        notebook's files update rule is owner-only too). */
     if(f.mine && typeof BW !== 'undefined' && BW && BW.sb && !BW.noCoverCol){
       var art = document.createElement('button'); art.className = 'art-btn'; art.type = 'button';
-      art.textContent = '\uD83C\uDFA8 Art';
+      art.textContent = 'Art';
       art.title = f.cover ? 'Change the cover art on your file' : 'Put cover art on your file — your own picture, shown beside it for everyone';
       art.addEventListener('click', function(e){ e.stopPropagation(); bwPickCover(f); });
       acts.appendChild(art);
@@ -3322,7 +3331,7 @@ function bwToggleSave(post){
     BW.sb.from('saves').insert({ post_id: post.id, user_id: BW.user.id })
       .then(function(r){
         if(r.error){ toast(r.error.message); return; }
-        toast('Saved to your list. 🔖');
+        toast('Saved to your list.');
         if(post.media_url) bwDownload(post.media_url);
         bwFetchSocial();
       });
@@ -3363,13 +3372,13 @@ function bwDecorate(){
       if(head && !head.querySelector('.save-btn')){
         var sv = document.createElement('button');
         sv.type = 'button'; sv.className = 'save-btn' + (BW.saves[post.id] ? ' saved' : '');
-        sv.textContent = BW.saves[post.id] ? '🔖 Saved' : '🔖 Save';
+        sv.textContent = BW.saves[post.id] ? 'Saved' : 'Save';
         sv.addEventListener('click', function(){ bwToggleSave(post); });
         var del = head.querySelector('.post-del');
         if(del) head.insertBefore(sv, del); else head.appendChild(sv);
       }
       var svNow = head ? head.querySelector('.save-btn') : null;
-      if(svNow){ svNow.className = 'save-btn' + (BW.saves[post.id] ? ' saved' : ''); svNow.textContent = BW.saves[post.id] ? '🔖 Saved' : '🔖 Save'; }
+      if(svNow){ svNow.className = 'save-btn' + (BW.saves[post.id] ? ' saved' : ''); svNow.textContent = BW.saves[post.id] ? 'Saved' : 'Save'; }
       /* reactions — real now */
       var rxBox = card.querySelector('.reactions');
       if(rxBox){
@@ -3586,7 +3595,7 @@ window.__bwAuth = function(form){
       document.querySelectorAll('#lake-chips .chip.lake-chip').forEach(function(c){ c.classList.remove('active'); });
       chipSaved.classList.add('active'); chipAll.classList.remove('active');
       bwDecorate();
-      toast('Your saved posts — your shelf of the Sea. 🔖');
+      toast('Your saved posts — your shelf of the Sea.');
     });
   }
   /* ---------- LAKES (build 97, his design Nov 7) ----------
@@ -6451,12 +6460,12 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
       if(open){
         holidayBtn.removeAttribute('disabled');
         holidayBtn.classList.remove('locked');
-        holidayBtn.innerHTML = '<span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label"><i class="h-emo">' + meta.emo + '</i> ' + meta.label + '</span></span>';
+        holidayBtn.innerHTML = '<span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label">' + meta.label + '</span></span>';
         holidayBtn.title = 'Cycle the season: Normal → Halloween → Christmas → Normal';
       } else {
         holidayBtn.setAttribute('disabled', '');
         holidayBtn.classList.add('locked');
-        holidayBtn.innerHTML = '<span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label"><i class="h-emo"></i> Happy Holidays</span></span>';
+        holidayBtn.innerHTML = '<span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label">Happy Holidays</span></span>';
         holidayBtn.title = 'Locked — the season runs Sep 30 to Jan 1.';
       }
     }
@@ -6464,14 +6473,14 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
   }
   if(holidayBtn) holidayBtn.addEventListener('click', function(){
     if(!seasonOpen()){
-      if(typeof toast === 'function') toast('🔒 The holidays are locked until September 30.');
+      if(typeof toast === 'function') toast('The holidays are locked until September 30.');
       return;
     }
     theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
     applyTheme();
     if(typeof toast === 'function'){
-      toast(theme === 'halloween' ? '🎃 Halloween mode — plum goes black, gold goes orange.'
-        : theme === 'xmas' ? '🎄 Christmas mode — plum goes green, gold goes red.'
+      toast(theme === 'halloween' ? 'Halloween mode — plum goes black, gold goes orange.'
+        : theme === 'xmas' ? 'Christmas mode — plum goes green, gold goes red.'
         : 'Back to the plum & gold.');
     }
   });
@@ -7927,6 +7936,12 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
     try{ sc.scrollTo({ top: target, behavior: 'smooth' }); }
     catch(e){ sc.scrollTop = target; }
   }
+  function guideGlideTop(){
+    var sc = modal.querySelector('.waters-guide-card');
+    if(!sc) return;
+    try{ sc.scrollTo({ top: 0, behavior: 'smooth' }); }
+    catch(e){ sc.scrollTop = 0; }
+  }
   function spot(i){
     tourIdx = i;
     items.forEach(function(it, j){
@@ -7940,7 +7955,7 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
            the delays wrapped, flashing whole words in blobs. */
         if(!it.querySelector('.hl-ch')) hearthLetters(it, 34);
         var chs110 = it.querySelectorAll('.hl-ch');
-        var step110 = chs110.length ? Math.max(6, Math.floor(3200 / chs110.length)) : 34;
+        var step110 = chs110.length ? Math.max(6, Math.floor(2300 / chs110.length)) : 34;
         chs110.forEach(function(s110, k110){ s110.style.setProperty('--gd', (k110 * step110) + 'ms'); });
       }
     });
@@ -7953,16 +7968,17 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
   function startTour(){
     stopTour();
     spot(0);
-    /* FINAL FIXES (Nov 9, guide overhaul): the tour walks SLOWLY —
-       nine seconds a card, so a first-timer can truly read — and
-       after one full walk it sets every card free: no ghosts, all
-       readable at once. From there the cards belong to the reader:
-       tap any one to hold it in the light, as long as you like. */
+    /* FIX ROUND, the 20-SECOND LAW (his amendment, Nov 9): the
+       tour is ONE timed cycle of about twenty seconds — an even
+       2.5-second tick per card, gliding to each box as it lights —
+       and when the last box is done it rides back to the TOP of
+       the guide and ends, every card free. Tap-to-hold still
+       stops the clock dead, for as long as the reader wants. */
     tourTimer = setInterval(function(){
       var nx = tourIdx + 1;
-      if(nx >= items.length){ stopTour(); clearSpot(); return; }
+      if(nx >= items.length){ stopTour(); clearSpot(); guideGlideTop(); return; }
       spot(nx);
-    }, 9000);
+    }, 2500);
   }
   function stopTour(){ if(tourTimer){ clearInterval(tourTimer); tourTimer = null; } }
   items.forEach(function(it, j){ it.addEventListener('click', function(){ stopTour(); spot(j); }); });
@@ -8277,7 +8293,7 @@ button.bw-armed{white-space:normal !important; height:auto !important; min-heigh
 .bl-entry, .bls-entry{cursor:pointer}
 /* the lane reader popup: dim plum, the entry reads full-page, its
    letters glow hearthy one by one */
-#bl-pop{position:fixed; inset:0; z-index:500; display:flex; align-items:center; justify-content:center;
+#bl-pop{position:fixed; inset:0; z-index:1300; display:flex; align-items:center; justify-content:center;
   background:rgba(13,7,22,.8); backdrop-filter:blur(2px)}
 #bl-pop[hidden]{display:none}
 #bl-pop-card{position:relative; width:min(860px,94vw); max-height:88vh; overflow:auto;
@@ -8293,20 +8309,44 @@ button.bw-armed{white-space:normal !important; height:auto !important; min-heigh
 #bl-pop-x:hover{border-color:var(--gold); color:var(--yellow)}
 @media (max-width:760px){ #bl-pop-card{padding:24px 20px 22px} }
 @media (max-width:760px){
+  /* FIX 9 (his call, Nov 9): the banner takes its PC framing on
+     phones — full width of its slot, height from the image's own
+     2420/401 ratio. No inward squeeze, no inset float. */
+  .header-banner img{width:100%; height:auto}
   /* the depth gauge owns the right edge on phones — the Sea's whole
      column keeps a real gutter, so no bubble slides under the meter */
   #view-sea .sea-inner{padding-right:38px}
   #view-sea .feed{min-width:0; max-width:100%}
   #sea-banks-m{min-width:0}
   #sea-banks-m .side-panel{min-width:0; max-width:100%; box-sizing:border-box}
+  /* FIX 4 (his screenshot, Nov 9 — the NO-CUTOFF law): a file row's
+     whole control row lives INSIDE its card on phones — the
+     contributor and the buttons drop to their own full-width line
+     and wrap there; every button whole, nothing past the edge. */
+  .file-row .fcell-last{flex:1 1 100%; margin-left:0; flex-wrap:wrap; row-gap:8px; min-width:0}
+  .file-row .row-actions{flex-wrap:wrap; row-gap:6px; min-width:0; max-width:100%}
+  .file-row .dl-btn{margin-left:0}
+  /* and the table head keeps its whole words on a phone: a smaller,
+     tighter mono in columns that may shrink — nothing clipped,
+     nothing mangled */
+  .files-table-head{grid-template-columns:minmax(0,1.05fr) minmax(0,1.05fr) minmax(0,.45fr); gap:8px; font-size:10.5px; letter-spacing:.04em}
+  .files-table-head span{min-width:0; white-space:nowrap}
 }
-/* the Scroll edition's lightning, down its side — every screen */
+/* the Scroll edition's lightning — the OG SPINE, grafted back
+   (his call, Nov 9): the zigzag trail from the original build
+   page — an unlit plum bolt running the scroll's whole height,
+   and a lit gold twin that FILLS the same zigzag as you read
+   down, tracing the exact path, with the old 7-second flicker.
+   The straight column of little stamps is retired. */
 .bls-scroll{position:relative}
-.bls-bolt{position:absolute; left:7px; top:16px; bottom:16px; width:15px; opacity:.5; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 96'%3E%3Cpath d='M14 36 L5 50 L11 50 L8 60 L19 46 L13 46 Z' fill='%23f0b73f'/%3E%3C/svg%3E");
-  background-repeat:repeat-y; background-size:15px 96px; background-position:center top;
-  filter:drop-shadow(0 0 5px rgba(240,183,63,.65))}
-@media (max-width:760px){ .bls-bolt{opacity:.7; left:6px} }
+.bls-spine{position:absolute; left:7px; top:16px; bottom:16px; width:16px; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='300' viewBox='0 0 16 300'%3E%3Cpolyline points='8,0 13,58 6,68 12,77 4,86 10,140 5,150 13,196 7,206 12,214 5,224 9,268 8,300' fill='none' stroke='%23522665' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:repeat-y; background-size:16px 300px; background-position:center top}
+.bls-fill{position:absolute; left:0; top:0; width:16px; height:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='300' viewBox='0 0 16 300'%3E%3Cpolyline points='8,0 13,58 6,68 12,77 4,86 10,140 5,150 13,196 7,206 12,214 5,224 9,268 8,300' fill='none' stroke='%23ffd94d' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:repeat-y; background-size:16px 300px; background-position:center top;
+  filter:drop-shadow(0 0 4px rgba(255,217,77,.55)); transition:height .3s ease; animation:blsFlicker 7s linear infinite}
+@keyframes blsFlicker{0%,100%{opacity:1}88%{opacity:1}89%{opacity:.5}90%{opacity:1}93%{opacity:.65}94%{opacity:1}}
 </style>
 <script>
 /* ============ BUILD 110 BENCH JS ============ */
@@ -8390,13 +8430,39 @@ button.bw-armed{white-space:normal !important; height:auto !important; min-heigh
     var zap110 = window.__bwZap;
     window.__bwZap = function(){ bwBlPopClose(); zap110(); };
   }
-  /* the Scroll edition's side lightning */
+  /* the Scroll edition's OG lightning spine (grafted, Nov 9):
+     a plum zigzag track down the scroll's side, and a gold fill
+     that traces the exact zigzag as far as the reading line —
+     72% of the glass, the original design's measure — has
+     travelled through the scroll. Scroll-driven, off-path,
+     zig-zag: the way the lightning build log first worked. */
   var scrollPanel = document.querySelector('.bls-scroll');
-  if(scrollPanel && !scrollPanel.querySelector('.bls-bolt')){
-    var bolt = document.createElement('div');
-    bolt.className = 'bls-bolt'; bolt.setAttribute('aria-hidden', 'true');
-    scrollPanel.appendChild(bolt);
+  var blsFill = null;
+  if(scrollPanel && !scrollPanel.querySelector('.bls-spine')){
+    var spine = document.createElement('div');
+    spine.className = 'bls-spine'; spine.setAttribute('aria-hidden', 'true');
+    blsFill = document.createElement('div');
+    blsFill.className = 'bls-fill';
+    spine.appendChild(blsFill);
+    scrollPanel.appendChild(spine);
+  } else if(scrollPanel){ blsFill = scrollPanel.querySelector('.bls-fill'); }
+  var blsTick = false;
+  function blsUpdate(){
+    blsTick = false;
+    if(!scrollPanel || !blsFill) return;
+    var ed = document.getElementById('bl-ed-scroll');
+    if(!ed || ed.hidden) return;
+    var r = scrollPanel.getBoundingClientRect();
+    var total = r.height - 32;
+    var passed = Math.max(0, Math.min(total, (window.innerHeight * 0.72) - r.top - 16));
+    blsFill.style.height = passed + 'px';
   }
+  window.addEventListener('scroll', function(){ if(!blsTick){ blsTick = true; requestAnimationFrame(blsUpdate); } }, { passive: true });
+  window.addEventListener('resize', blsUpdate);
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.closest && e.target.closest('#bl-tab-scroll, #bl-tab-cog, [data-view="buildlog"]')) setTimeout(blsUpdate, 90);
+  });
+  blsUpdate();
   /* ---------- FINAL FIXES: the theme follows you into the Ocean ----------
      Whatever colors the site is wearing when the Ocean door is
      tapped — Halloween, Christmas, or plain plum-and-gold — ride

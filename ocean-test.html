@@ -338,7 +338,7 @@
         rgba(23,13,41,0) 42px, rgba(8,3,18,.34) 58px, rgba(23,13,41,0) 72px),
       linear-gradient(160deg, var(--panel-2), var(--panel) 55%, #170d29);
     background-size:auto, 144px 100%, auto;
-    transition:transform 2.6s cubic-bezier(.55,.06,.16,1), background-size 2.6s cubic-bezier(.55,.06,.16,1);
+    transition:transform 1.6s cubic-bezier(.55,.06,.16,1); will-change:transform;
     animation:foldDrift 14s ease-in-out infinite alternate;
   }
   @keyframes foldDrift{
@@ -435,11 +435,16 @@
      behind it and sways, then settles soft instead of stopping. */
   #doors.open .door-r{transition-delay:.07s}
   #doors .door-panel::after{transform-origin:top center}
-  #doors.open .door-panel::after{animation:doorHemSway 2.6s ease-out}
+  #doors.open .door-panel::after{animation:doorHemSway 1.6s ease-out}
   @keyframes doorHemSway{0%{transform:rotate(0deg)}18%{transform:rotate(-1.5deg) translateX(-5px)}42%{transform:rotate(1deg) translateX(3px)}68%{transform:rotate(-.45deg) translateX(-1px)}100%{transform:rotate(0deg)}}
   #doors.open .door-seam{opacity:0; transition:opacity .3s ease; animation:none;}
   #doors.open .door-breath{opacity:0; transition:opacity .4s ease; animation:none;}
   #doors.open .door-center{opacity:0; transform:scale(1.06);}
+  /* FIX 8 (Nov 9): the moment opening starts, every repaint-heavy
+     idle animation on the doors stops — the gather runs on the
+     compositor (transform only), nothing repaints mid-flight. */
+  #doors.open .door-panel{animation:none;}
+  #doors.open .door-medal{animation:none;}
   @media (prefers-reduced-motion: reduce){
     #doors .door-seam, #doors .door-breath, #doors .door-medal, #doors .door-hint{animation:none;}
     #doors .door-panel{transition:transform .3s ease; animation:none;}
@@ -1305,7 +1310,7 @@ loadVaultMeter();
         if (!AC) return;
         const ctx = new AC();
         if (ctx.state === "suspended") ctx.resume();
-        const dur = 2.4, sr = ctx.sampleRate;
+        const dur = 1.6, sr = ctx.sampleRate;
         const buf = ctx.createBuffer(1, Math.floor(sr * dur), sr);
         const d = buf.getChannelData(0);
         let lpv = 0;
@@ -1341,9 +1346,9 @@ loadVaultMeter();
       doors.setAttribute("aria-hidden", "true");
       doors.style.pointerEvents = "none";
       if (!reduced) doorsWhoosh();
-      /* FINAL FIXES: the hide now waits for the real 2.6s gather —
-         the old 1750ms cut the curtains off mid-flight. */
-      setTimeout(() => { doors.style.display = "none"; }, reduced ? 340 : 2750);
+      /* FIX 8: the hide lands the moment the 1.6s gather lands —
+         no dead plum, no idle wait behind closed cloth. */
+      setTimeout(() => { doors.style.display = "none"; }, reduced ? 340 : 1700);
     }
     doors.addEventListener("click", openDoors);
     doors.addEventListener("keydown", (e) => {
