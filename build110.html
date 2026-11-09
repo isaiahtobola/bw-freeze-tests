@@ -5163,29 +5163,17 @@ runners['sea-canvas'] = function(canvas, ctx, state){
         var vo110 = vv110 ? vv110.offsetTop : 0;
         var mid110 = vo110 + vh110 * 0.5 - r110.top;
         var k110 = r110.height ? (H / r110.height) : s.dpr;
-        /* ROUND 2 — THE POND'S HOME (his correction, Nov 9 — he
-           said he was wrong about "not scroll"; latest word wins,
-           and the pin computed above is retired): the pond lives
-           IN the page now. Centered across the Sea, its top edge
-           resting just under the Sea's top text boxes — the grid
-           of panels and the composer begins there — and it scrolls
-           with the background like everything else on the page.
-           Scroll down and it leaves with the top section, never
-           hovering mid-feed over posts; scroll up and it is home
-           again, never chasing the window up into the header or
-           over the top boxes. Measured in the canvas's own
-           coordinates off the grid's live rectangle, so phone and
-           PC each get their own true top. The radius margin uses
-           the pond's own sizing base, so the wavy rim — wiggle and
-           all — never crosses above the grid's top edge. */
-        var gridR2 = document.querySelector('#view-sea .sea-grid');
-        var topR2 = 0;
-        if(gridR2){
-          var grR2 = gridR2.getBoundingClientRect();
-          if(r110.height) topR2 = (grR2.top - r110.top) * k110;
-        }
-        var rbHome = Math.min(Math.min(W, H) * 0.385 * (state.pondGrow || 1), W * 0.47, (window.visualViewport ? window.visualViewport.height : (window.innerHeight || 800)) * s.dpr * 0.47);
-        return topR2 + rbHome * 1.14 + 10 * s.dpr;
+        /* THE POND PIN — FINAL LAW (his word, Nov 9, owning the
+           confusion himself and closing it): "Lake should not scroll
+           up like this. It should always stay centered on the mobile
+           and pc screen at all times, regardless of what scrolls."
+           So the Round 2 in-page home is retired and the pin the
+           final-fixes pass proved is restored byte for byte: the
+           center is the VISUAL viewport's center, converted into
+           the canvas's own device pixels and clamped to the canvas,
+           recomputed every frame — at every scroll depth, phone
+           and PC alike, the pond's center IS the screen's center. */
+        return Math.max(0, Math.min(H, mid110 * k110));
       })();
       /* BUILD 102 (his call): "the bigger the posts and scroll
          gets, the bigger the lake grows" — the pond swells with
