@@ -1024,6 +1024,13 @@ body[data-theme="xmas"] .orb-sun svg .rays{stroke:#d93636}
    only stray var-driven bits changed. Now EVERY post box takes the season. */
 body[data-theme="halloween"] .post-card{background:rgba(43,24,7,.93); border-color:rgba(255,165,58,.4)}
 body[data-theme="xmas"] .post-card{background:rgba(9,38,20,.93); border-color:rgba(110,220,150,.32)}
+/* FIX 10 (his Halloween screenshot, Nov 9): the TEXT FIELDS dress
+   too — composer, media link, search, comment, join, lake/river
+   name, home-video and auth inputs all kept their plum fill inside
+   the themed panels. Each now takes a DARKER GRADIENT of the
+   holiday color; normal days keep their plum, untouched. */
+body[data-theme="halloween"] .composer-main textarea, body[data-theme="halloween"] .media-link, body[data-theme="halloween"] .search-box, body[data-theme="halloween"] .comment-row input, body[data-theme="halloween"] .join-form input, body[data-theme="halloween"] #lake-create input, body[data-theme="halloween"] #river-create input[type="text"], body[data-theme="halloween"] .hv-card input, body[data-theme="halloween"] #auth-email-form input, body[data-theme="halloween"] #auth-newpass-form input{background:linear-gradient(160deg, #33200f, #150c06); border-color:rgba(255,165,58,.35)}
+body[data-theme="xmas"] .composer-main textarea, body[data-theme="xmas"] .media-link, body[data-theme="xmas"] .search-box, body[data-theme="xmas"] .comment-row input, body[data-theme="xmas"] .join-form input, body[data-theme="xmas"] #lake-create input, body[data-theme="xmas"] #river-create input[type="text"], body[data-theme="xmas"] .hv-card input, body[data-theme="xmas"] #auth-email-form input, body[data-theme="xmas"] #auth-newpass-form input{background:linear-gradient(160deg, #17452a, #081a0f); border-color:rgba(110,220,150,.3)}
 #holiday-btn{white-space:nowrap}
 #holiday-btn.locked{opacity:.42; filter:grayscale(1); cursor:not-allowed}
 #holiday-btn .h-emo{font-style:normal}
