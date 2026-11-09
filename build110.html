@@ -448,7 +448,7 @@ body[data-theme="halloween"] .side-panel, body[data-theme="xmas"] .side-panel{ba
   font-size:44px; color:rgba(247,234,209,.92); margin-bottom:14px;
   border:1px solid rgba(240,183,63,.3);
 }
-.media-tile.audio{background:linear-gradient(135deg, #291b44, #3a2560 60%, #6d4fa1)}
+.media-tile.audio{background:linear-gradient(135deg, var(--panel2), var(--plum-mid) 60%, var(--violet))}
 .dl-chip{
   display:inline-block; font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.08em;
   background:rgba(255,209,102,.16); color:var(--yellow); border:1px solid rgba(255,209,102,.55);
@@ -1031,6 +1031,61 @@ body[data-theme="xmas"] .post-card{background:rgba(9,38,20,.93); border-color:rg
    holiday color; normal days keep their plum, untouched. */
 body[data-theme="halloween"] .composer-main textarea, body[data-theme="halloween"] .media-link, body[data-theme="halloween"] .search-box, body[data-theme="halloween"] .comment-row input, body[data-theme="halloween"] .join-form input, body[data-theme="halloween"] #lake-create input, body[data-theme="halloween"] #river-create input[type="text"], body[data-theme="halloween"] .hv-card input, body[data-theme="halloween"] #auth-email-form input, body[data-theme="halloween"] #auth-newpass-form input{background:linear-gradient(160deg, #33200f, #150c06); border-color:rgba(255,165,58,.35)}
 body[data-theme="xmas"] .composer-main textarea, body[data-theme="xmas"] .media-link, body[data-theme="xmas"] .search-box, body[data-theme="xmas"] .comment-row input, body[data-theme="xmas"] .join-form input, body[data-theme="xmas"] #lake-create input, body[data-theme="xmas"] #river-create input[type="text"], body[data-theme="xmas"] .hv-card input, body[data-theme="xmas"] #auth-email-form input, body[data-theme="xmas"] #auth-newpass-form input{background:linear-gradient(160deg, #17452a, #081a0f); border-color:rgba(110,220,150,.3)}
+/* FIX 11 (his File Share screenshots, Nov 9): the OUTER Files
+   panel kept its translucent plum while the rows inside it
+   themed. His contrast pairing: halloween wears a DARKER ORANGE
+   gradient outside the black-brown rows; christmas wears a DARK
+   RED gradient outside the green rows. Normal days: plum. */
+body[data-theme="halloween"] .files-panel{background:linear-gradient(160deg, rgba(74,42,14,.92), rgba(33,18,4,.94)); border-color:rgba(255,165,58,.45)}
+body[data-theme="xmas"] .files-panel{background:linear-gradient(160deg, rgba(94,20,20,.92), rgba(42,8,10,.94)); border-color:rgba(255,90,77,.4)}
+/* FIX 12 (his capstone, Nov 9: "Theme the entire site") — the
+   last plum holdouts among the chrome: rail, guide, tutor,
+   scrims, carousel, tiles, cards, wells, chips, tracks. The
+   banner image stays artwork; the Scroll edition's plum paper
+   stays his "peak"; member content is never recolored. */
+body[data-theme="halloween"] .mrail-btn{background:rgba(23,16,11,.94)}
+body[data-theme="xmas"] .mrail-btn{background:rgba(13,36,22,.94)}
+body[data-theme="halloween"] .mrail-menu{background:rgba(23,16,11,.97)}
+body[data-theme="xmas"] .mrail-menu{background:rgba(13,36,22,.97)}
+body[data-theme="halloween"] #sea-help-modal{background:rgba(10,6,5,.9)}
+body[data-theme="xmas"] #sea-help-modal{background:rgba(7,22,12,.9)}
+body[data-theme="halloween"] #sea-help-modal .waters-guide-card{background:rgba(23,16,11,.66)}
+body[data-theme="xmas"] #sea-help-modal .waters-guide-card{background:rgba(13,36,22,.66)}
+body[data-theme="halloween"] .guide-item{background:rgba(23,16,11,.38)}
+body[data-theme="xmas"] .guide-item{background:rgba(13,36,22,.38)}
+body[data-theme="halloween"] #bw-tutor{background:rgba(16,10,5,.72)}
+body[data-theme="xmas"] #bw-tutor{background:rgba(5,16,9,.72)}
+body[data-theme="halloween"] #bw-tutor .tcard{background:rgba(23,16,11,.97)}
+body[data-theme="xmas"] #bw-tutor .tcard{background:rgba(13,36,22,.97)}
+body[data-theme="halloween"] #bl-pop{background:rgba(10,6,3,.8)}
+body[data-theme="xmas"] #bl-pop{background:rgba(4,14,8,.8)}
+body[data-theme="halloween"] .hv-modal{background:rgba(10,6,3,.72)}
+body[data-theme="xmas"] .hv-modal{background:rgba(4,14,8,.72)}
+body[data-theme="halloween"] .hv-box{background:rgba(23,16,11,.5)}
+body[data-theme="xmas"] .hv-box{background:rgba(13,36,22,.5)}
+body[data-theme="halloween"] .hv-box:hover{background:rgba(33,23,16,.65)}
+body[data-theme="xmas"] .hv-box:hover{background:rgba(18,51,30,.65)}
+body[data-theme="halloween"] .bw-carousel, body[data-theme="xmas"] .bw-carousel{background:var(--bg)}
+body[data-theme="halloween"] .bw-car-btn, .bw-car-count{background:rgba(23,16,11,.72)}
+body[data-theme="xmas"] .bw-car-btn, .bw-car-count{background:rgba(13,36,22,.72)}
+body[data-theme="halloween"] .bw-car-dot{background:rgba(23,16,11,.55)}
+body[data-theme="xmas"] .bw-car-dot{background:rgba(13,36,22,.55)}
+body[data-theme="halloween"] .hub-media-tile{background:rgba(23,16,11,.92); border-color:rgba(255,165,58,.28)}
+body[data-theme="xmas"] .hub-media-tile{background:rgba(13,36,22,.92); border-color:rgba(110,220,150,.28)}
+body[data-theme="halloween"] .media-card{background:rgba(23,16,11,.88); border-color:rgba(255,165,58,.28)}
+body[data-theme="xmas"] .media-card{background:rgba(13,36,22,.88); border-color:rgba(110,220,150,.28)}
+body[data-theme="halloween"] .cmt{background:rgba(10,6,3,.45); border-color:rgba(255,165,58,.18)}
+body[data-theme="xmas"] .cmt{background:rgba(4,14,8,.45); border-color:rgba(110,220,150,.18)}
+body[data-theme="halloween"] .chip{background:rgba(255,140,26,.07); border-color:rgba(255,140,26,.3)}
+body[data-theme="xmas"] .chip{background:rgba(110,220,150,.07); border-color:rgba(110,220,150,.3)}
+body[data-theme="halloween"] .up-track{background:#150c06; border-color:rgba(255,165,58,.35)}
+body[data-theme="xmas"] .up-track{background:#081a0f; border-color:rgba(110,220,150,.3)}
+body[data-theme="halloween"] .rx-bank-del{background:rgba(10,6,3,.88)}
+body[data-theme="xmas"] .rx-bank-del{background:rgba(4,14,8,.88)}
+body[data-theme="halloween"] #lake-list::-webkit-scrollbar-track, body[data-theme="halloween"] #river-bar::-webkit-scrollbar-track{background:rgba(10,6,3,.35)}
+body[data-theme="xmas"] #lake-list::-webkit-scrollbar-track, body[data-theme="xmas"] #river-bar::-webkit-scrollbar-track{background:rgba(4,14,8,.35)}
+body[data-theme="halloween"] .site-footer{background:#0a0605}
+body[data-theme="xmas"] .site-footer{background:#07160c}
 #holiday-btn{white-space:nowrap}
 #holiday-btn.locked{opacity:.42; filter:grayscale(1); cursor:not-allowed}
 #holiday-btn .h-emo{font-style:normal}
@@ -1225,7 +1280,7 @@ html.kint-lock{overflow:hidden !important}
 #bl-gate[hidden]{display:none}
 .blg-door{position:absolute; top:0; bottom:0; width:50.5%; background:
   repeating-linear-gradient(90deg, rgba(255,255,255,.032) 0 3px, rgba(0,0,0,.055) 3px 5px, transparent 5px 9px),
-  radial-gradient(ellipse at 50% 120%, #3a2560 0%, #1f1433 55%, #150d20 100%);
+  radial-gradient(ellipse at 50% 120%, var(--plum-mid) 0%, var(--panel) 55%, var(--bg) 100%);
   will-change:transform}
 .blg-left{left:0; border-right:3px solid var(--gold); box-shadow:inset -30px 0 60px rgba(0,0,0,.5)}
 .blg-right{right:0; border-left:3px solid var(--gold); box-shadow:inset 30px 0 60px rgba(0,0,0,.5)}
@@ -1723,7 +1778,7 @@ html.kint-lock{overflow:hidden !important}
       <h1>Build Log</h1>
       <p>Every build that made <b>this website</b> — logged in the workshop where it happened, by the two who built it. Isaiah's ideas and calls; Lux's craft and memory. <i>Free creative. No Kragle.</i></p>
       <div class="bl-stats"><span>110 BUILDS ON THE PROJECT RECORD</span><span>THE ROAD TO “COMPLETE” · AND WHAT CAME AFTER</span><span>OCT 30 – NOV 9, 2026</span><span>ONE FILE · TWO BUILDERS</span></div>
-      <button class="bl-replay" id="bl-replay" type="button">Re-open the workshop</button><button class="bl-replay bl-lanes-btn" id="bl-lanes" type="button">Lanes: 1</button><p class="bl-zap-hint">DOUBLE-CLICK OR DOUBLE-TAP ANYWHERE ON THIS PAGE — CALL THE LIGHTNING</p>
+      <button class="bl-replay" id="bl-replay" type="button">Re-open the workshop</button><p class="bl-zap-hint">DOUBLE-CLICK OR DOUBLE-TAP ANYWHERE ON THIS PAGE — CALL THE LIGHTNING</p>
       <div class="bl-vtabs" role="tablist" aria-label="Build Log editions"><button class="bl-vtab on" id="bl-tab-cog" type="button">The Workshop — Cog Edition</button><button class="bl-vtab" id="bl-tab-scroll" type="button">The Scroll — Lightning Edition</button></div>
     </div>
     <div class="bl-entries" id="bl-ed-cog">
@@ -2163,6 +2218,22 @@ moreBtn.addEventListener('click', function(e){
 });
 document.addEventListener('click', function(e){ if(!moreWrap.contains(e.target)) closeMore(); });
 document.getElementById('get-started').addEventListener('click', function(){ switchView('sea'); });
+
+/* ---------- room deep links (Nov 9) ----------
+   The Completion Filter's MENUS sends visitors to a room, not
+   just the front door: ?room=sea opens the Sea, ?room=files File
+   Share, and so on — through the same switchView the rail uses.
+   Unknown or absent room: the site opens exactly as it always
+   has. The address keeps its ?room= so a refresh stays put. */
+(function(){
+  var room = '';
+  try{ room = (new URLSearchParams(window.location.search).get('room') || '').toLowerCase(); }catch(e){}
+  var ROOMS = ['home','login','welcome','sea','hub','join','files','kintsugi','buildlog'];
+  if(!room || ROOMS.indexOf(room) < 0 || room === 'home') return;
+  var go = function(){ switchView(room); };
+  if(document.readyState === 'complete') setTimeout(go, 50);
+  else window.addEventListener('load', function(){ setTimeout(go, 50); });
+})();
 
 /* ---------- demo toasts ---------- */
 /* Log In button opens the sign-up modal — wired in the modal block below. */
@@ -7468,20 +7539,12 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
       if(now - lastTap < 320){ window.__bwZap(); lastTap = 0; } else { lastTap = now; }
     }, {passive:true});
     var entries = blView.querySelector('.bl-entries');
-    var lanesBtn = document.getElementById('bl-lanes');
-    var lanes = 1;
-    try{ lanes = parseInt(localStorage.getItem('bw-bl-lanes') || '1', 10) || 1; }catch(e){}
-    if(lanes < 1 || lanes > 6) lanes = 1;
-    function applyLanes(){
-      if(entries) entries.setAttribute('data-lanes', String(lanes));
-      if(lanesBtn) lanesBtn.textContent = 'Lanes: ' + lanes;
-    }
-    if(lanesBtn) lanesBtn.addEventListener('click', function(){
-      lanes = lanes >= 6 ? 1 : lanes + 1;
-      try{ localStorage.setItem('bw-bl-lanes', String(lanes)); }catch(e){}
-      applyLanes();
-    });
-    applyLanes();
+    /* LANES PINNED AT 2 (his call, Nov 9): the 1-6 lane cycler is
+       gone — the Workshop edition reads in exactly two lanes on
+       PC and phone alike. Entries, cog numbers, order and the
+       reader popup are untouched; on phones the lane-2 title
+       cards + popup carry the reading, as they always did. */
+    if(entries) entries.setAttribute('data-lanes', '2');
     var cogTab = document.getElementById('bl-tab-cog'), scrollTab = document.getElementById('bl-tab-scroll');
     var scrollEd = document.getElementById('bl-ed-scroll');
     function blShowEd(which){
@@ -8304,10 +8367,18 @@ button.bw-armed{white-space:normal !important; height:auto !important; min-heigh
 #bl-pop-x:hover{border-color:var(--gold); color:var(--yellow)}
 @media (max-width:760px){ #bl-pop-card{padding:24px 20px 22px} }
 @media (max-width:760px){
-  /* FIX 9 (his call, Nov 9): the banner takes its PC framing on
-     phones — full width of its slot, height from the image's own
-     2420/401 ratio. No inward squeeze, no inset float. */
-  .header-banner img{width:100%; height:auto}
+  /* FIX 9 (his call, Nov 9) + 9b (his refinement, same day): the
+     banner takes its PC DIMENSIONS on phones — the PC box itself
+     (112px tall, 675.9 wide by the image's own 2420/401 ratio),
+     centered and window-cropped by the screen, never shrunk.
+     At PC scale the vinyl disc, the ceremony's landing scale and
+     the yin/yang meet all match the desktop geometry exactly.
+     Pins unmoved: vinyl fractions, slots, emblems, mask, file. */
+  .header-banner img{width:auto; height:112px; flex:none; max-width:none}
+  /* 9d: the header's single track is capped at the screen, so the
+     PC-size banner centers and crops instead of stretching the
+     whole header off-center */
+  .header-row{grid-template-columns:minmax(0,1fr)}
   /* the depth gauge owns the right edge on phones — the Sea's whole
      column keeps a real gutter, so no bubble slides under the meter */
   #view-sea .sea-inner{padding-right:38px}
@@ -8428,8 +8499,8 @@ button.bw-armed{white-space:normal !important; height:auto !important; min-heigh
   /* the Scroll edition's OG lightning spine (grafted, Nov 9):
      a plum zigzag track down the scroll's side, and a gold fill
      that traces the exact zigzag as far as the reading line —
-     72% of the glass, the original design's measure — has
-     travelled through the scroll. Scroll-driven, off-path,
+     the upper half of the glass (his Nov 9 measure, raised from
+     the original 72%) — has travelled through the scroll. Scroll-driven, off-path,
      zig-zag: the way the lightning build log first worked. */
   var scrollPanel = document.querySelector('.bls-scroll');
   var blsFill = null;
@@ -8449,7 +8520,7 @@ button.bw-armed{white-space:normal !important; height:auto !important; min-heigh
     if(!ed || ed.hidden) return;
     var r = scrollPanel.getBoundingClientRect();
     var total = r.height - 32;
-    var passed = Math.max(0, Math.min(total, (window.innerHeight * 0.72) - r.top - 16));
+    var passed = Math.max(0, Math.min(total, (window.innerHeight * 0.5) - r.top - 16));
     blsFill.style.height = passed + 'px';
   }
   window.addEventListener('scroll', function(){ if(!blsTick){ blsTick = true; requestAnimationFrame(blsUpdate); } }, { passive: true });
