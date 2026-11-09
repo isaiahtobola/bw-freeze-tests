@@ -4330,11 +4330,22 @@ runners['car-canvas'] = function(canvas, ctx, state){
          stands in the desert every lap and both sides of the road
          still get company — half the plants, twice the breathing
          room. A sprinkle, finally. */
-      var fam110 = shuffled(family());
-      fam110.forEach(function(fm, i){
-        var near110 = (i % 2 === 1);
-        var c110 = mk(fm.kind, fm.arms, fm.ostyle, near110 ? 1.35 : 0.95, near110 ? 1.75 : 1.3);
-        (near110 ? cactiNear : cactiFar).push(c110);
+      /* FIX ROUND (his finale-test catch, Nov 9): build 110 dealt
+         the twelve variants alternately from ONE shuffle, so six
+         variants could only ever stand on the far side of the road
+         and the other six only on the near side — and his eyes
+         caught it: "only barrel are on one side and the big tall
+         cactus are on other — they should all be on both sides."
+         The dawn law stands again, whole: EACH row is dealt the
+         FULL family — all twelve variants in its own shuffled
+         order — spread across a DOUBLE-WIDE world-loop (the draw
+         wrap below doubles to match), so the plants-per-screen
+         stays at build 110's sprinkle. Every variant on both
+         sides of the road; never a parade. */
+      [ {row: cactiFar, sMin: 0.95, sMax: 1.30}, {row: cactiNear, sMin: 1.35, sMax: 1.75} ].forEach(function(cfgFix){
+        shuffled(family()).forEach(function(fm){
+          cfgFix.row.push(mk(fm.kind, fm.arms, fm.ostyle, cfgFix.sMin, cfgFix.sMax));
+        });
       });
       /* the sprinkle (his re-ask, Nov 9 01:35, seeing the live 109
          crowd): each row deals its six plants into their OWN sixths
@@ -4342,9 +4353,9 @@ runners['car-canvas'] = function(canvas, ctx, state){
          gaps swing from a near-touch to a long empty stretch of
          desert. All twelve variants still stand every lap, six a
          side; no two laps sprinkle the same way twice. */
-      [cactiFar, cactiNear].forEach(function(row110){
-        row110.forEach(function(c110, j110){
-          c110.x = 0.02 + ((j110 + 0.12 + Math.random()*0.76)/row110.length)*1.14;
+      [cactiFar, cactiNear].forEach(function(rowFix){
+        rowFix.forEach(function(cFix, jFix){
+          cFix.x = 0.02 + ((jFix + 0.12 + Math.random()*0.76)/rowFix.length)*2.28;
         });
       });
       /* BUILD 99 (his call, Nov 7, minutes after he called the whole
@@ -4358,6 +4369,10 @@ runners['car-canvas'] = function(canvas, ctx, state){
       /* BUILD 101 (his call): company on both sides of the road —
          an octopus standing left of the car's home stretch and a
          BIG round barrel to the right, mixed sizes like the rest. */
+      /* QA hook (invisible, no behavior): the dealt desert, so the
+         test rig can count the variants standing on each side of
+         the road instead of guessing from pixels. */
+      window.__bwDesert = { far: cactiFar, near: cactiNear };
     }
     roadside();
     for(i=0;i<4;i++) birds.push({x:Math.random(), y:rand(0.10,0.30), ph:Math.random()*6.28, sp:rand(0.6,1.0), g:0});
@@ -4841,7 +4856,7 @@ runners['car-canvas'] = function(canvas, ctx, state){
     });
     /* far cacti */
     cactiFar.forEach(function(c){
-      var x = (((c.x - carState.dist*0.004) % 1.2) + 1.2) % 1.2 - 0.1;
+      var x = (((c.x - carState.dist*0.004) % 2.4) + 2.4) % 2.4 - 0.1;
       var prox = Math.max(0, 1 - Math.abs(x*W2 - carX)/(180*DPR));
       c.g = Math.min(1, (c.g||0) + (prox - (c.g||0)) * (prox > (c.g||0) ? 0.22 : 0.012));
       cactus(x*W2, groundY, c.s*1.2, '#3a2560', c.g, c.kind, c.arms, c.ostyle);
@@ -4863,7 +4878,7 @@ runners['car-canvas'] = function(canvas, ctx, state){
        the near layer roots on the viewer's side of the road, so it
        parallaxes IN FRONT of the car as it passes. */
     cactiNear.forEach(function(c){
-      var x = (((c.x - carState.dist*0.01) % 1.2) + 1.2) % 1.2 - 0.1;
+      var x = (((c.x - carState.dist*0.01) % 2.4) + 2.4) % 2.4 - 0.1;
       var prox = Math.max(0, 1 - Math.abs(x*W2 - carX)/(190*DPR));
       c.g = Math.min(1, (c.g||0) + (prox - (c.g||0)) * (prox > (c.g||0) ? 0.22 : 0.012));
       cactus(x*W2, roadY+44*DPR, c.s*1.3, '#251747', c.g, c.kind, c.arms, c.ostyle);
@@ -7897,6 +7912,21 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
   /* — the teaching tour: one card full, the rest transparent — */
   var items = Array.prototype.slice.call(modal.querySelectorAll('.guide-item'));
   var tourTimer = null, tourIdx = -1;
+  /* FIX ROUND (his finale-test catch, Nov 9): the guide learns the
+     forge's manners — as the tour's light moves to a card, the
+     guide GLIDES down to the section it is teaching, the way the
+     forge camera glides to each station. The lit card rests near
+     the top of the glass with a breath of room above it, so its
+     first line is where the reading starts. */
+  function guideGlide(it){
+    var sc = modal.querySelector('.waters-guide-card');
+    if(!sc || !it) return;
+    var r = it.getBoundingClientRect(), cr = sc.getBoundingClientRect();
+    var target = sc.scrollTop + (r.top - cr.top) - 28;
+    target = Math.max(0, Math.min(target, sc.scrollHeight - sc.clientHeight));
+    try{ sc.scrollTo({ top: target, behavior: 'smooth' }); }
+    catch(e){ sc.scrollTop = target; }
+  }
   function spot(i){
     tourIdx = i;
     items.forEach(function(it, j){
@@ -7914,6 +7944,7 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
         chs110.forEach(function(s110, k110){ s110.style.setProperty('--gd', (k110 * step110) + 'ms'); });
       }
     });
+    guideGlide(items[i]);
   }
   function clearSpot(){
     tourIdx = -1;
@@ -7935,6 +7966,20 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
   }
   function stopTour(){ if(tourTimer){ clearInterval(tourTimer); tourTimer = null; } }
   items.forEach(function(it, j){ it.addEventListener('click', function(){ stopTour(); spot(j); }); });
+  /* FIX ROUND — the visitor always wins (the forge's law): a wheel
+     turn, a touch-drag or a scroll key inside the guide stops the
+     tour from walking or gliding any further. The lit card stays
+     lit, and the guide belongs to the reader until they close it
+     or tap another card. */
+  var guideCardEl = modal.querySelector('.waters-guide-card');
+  if(guideCardEl){
+    guideCardEl.addEventListener('wheel', function(){ stopTour(); }, { passive: true });
+    guideCardEl.addEventListener('touchmove', function(){ stopTour(); }, { passive: true });
+  }
+  document.addEventListener('keydown', function(e){
+    if(modal.hidden) return;
+    if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].indexOf(e.key) >= 0) stopTour();
+  });
   function open(){
     modal.hidden = false;
     ['sea-help-title'].forEach(function(id){ var el = document.getElementById(id); if(el){ el.classList.add('hearth-live'); hearthLetters(el, 60); } });
