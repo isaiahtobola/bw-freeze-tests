@@ -498,7 +498,18 @@
 /* FINAL FIXES (Nov 9): the season follows you in. Broken World's
    Ocean door hands the active theme across as ?theme=, and the
    Ocean dresses the same on entry. Season law stands: the holiday
-   colors only exist from September 30 to January 1. */
+   colors only exist from September 30 to January 1.
+   ENTRY THEME (Nov 9, later — Isaiah: "i want the curtain themed
+   with whatever theme we are on at the moment of entry"): this
+   script is the first thing in the body, so the resolved theme
+   sits on <body> before anything paints — doors, gate and rooms
+   are dressed from frame one, no plum flash, no swap-in.
+   Resolution order: (1) the ?theme= hand-over, (2) the shared
+   site memory localStorage 'bw-theme' — the key Broken World
+   and the Completion Filter pages use, so the season picked
+   anywhere on the site greets you here, (3) the Ocean's own
+   remembered 'bw-ocean-theme'. Out of season, every leftover
+   is put away and the plum tapestry greets you, as always. */
 (function(){
   try{
     var q = new URLSearchParams(location.search).get('theme');
@@ -506,7 +517,7 @@
     var inSeason = md >= 930 || md <= 101;
     var t = '';
     if((q === 'halloween' || q === 'xmas') && inSeason){ t = q; try{ sessionStorage.setItem('bw-ocean-theme', q); }catch(e){} }
-    else if(inSeason){ try{ t = sessionStorage.getItem('bw-ocean-theme') || localStorage.getItem('bw-ocean-theme') || ''; }catch(e){} }
+    else if(inSeason){ try{ t = localStorage.getItem('bw-theme') || sessionStorage.getItem('bw-ocean-theme') || localStorage.getItem('bw-ocean-theme') || ''; }catch(e){} }
     if(t === 'halloween' || t === 'xmas') document.body.setAttribute('data-theme', t);
   }catch(e){}
 })();
@@ -1513,7 +1524,9 @@ loadVaultMeter();
      button greys out and locks, and any leftover seasonal theme
      is put away. A theme handed over by the main site's Ocean
      door (?theme=) or picked here is remembered in
-     'bw-ocean-theme'; a fresh visitor with neither simply lands
+     'bw-ocean-theme' and in the shared site memory 'bw-theme',
+     so one season is picked once and greets you everywhere in
+     the site family; a fresh visitor with neither simply lands
      on plum-and-gold. */
   (function () {
     var THEMES = ['', 'halloween', 'xmas'];
@@ -1561,6 +1574,7 @@ loadVaultMeter();
         }
       });
       try {
+        localStorage.setItem('bw-theme', theme);
         localStorage.setItem('bw-ocean-theme', theme);
         sessionStorage.setItem('bw-ocean-theme', theme);
       } catch (e) {}
