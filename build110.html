@@ -230,8 +230,8 @@ body[data-current="home"] .orbit-top{opacity:1; visibility:visible}
      room inside the clip instead of being sliced at the slot edge. */
   .slot-yang{left:auto; right:2px; width:68px}
   .slot-yin{left:2px; right:auto; width:68px}
-  .orb-yang{width:32px; left:18px; top:61px; --from:56px}
-  .orb-yin{width:32px; left:18px; top:61px; --from:-56px}
+  .orb-yang{width:44px; left:12px; top:61px; --from:56px}
+  .orb-yin{width:44px; left:12px; top:61px; --from:-56px}
   /* MOON MOVES UP — THE PERCH, NOT THE DIRECTION (his 2026-10-30
      21:14 + 21:32 calls): the old phone moon dropped in below the
      header and the MENU TAB covered it mid-dance. Now the layer moon
@@ -6446,20 +6446,22 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
         if(slotYin && orbYin) slotYin.style.height = dist + 'px';
         /* THE LEVEL MEET (his 2026-10-31 02:10 law): both emblems rest
            at the SAME height — their centers on the banner image's
-           vertical center, directly across from each other (phone
-           emblems are 32 tall, so top = banner center − 16). Short,
+           vertical center, directly across from each other (top =
+           banner center − half the emblem; phone emblems are 44 tall
+           since the Nov 9 calibration, matching PC). Short,
            equal journeys that stop when they meet: yang rises 56px,
            yin descends 56px. If the banner image hasn't loaded yet
            (rect height ~0), fall back to the header's middle — the
            load listener re-runs this and lands it exactly. */
         var bnr = hdr.querySelector('.header-banner img');
         var meetTop = null;
+        var halfOrb = (orb.getBoundingClientRect().height / 2) || 22;
         if(bnr){
           var br = bnr.getBoundingClientRect();
           var slotTop = slot.getBoundingClientRect().top;
-          if(br.height > 10) meetTop = (br.top - slotTop) + (br.height / 2) - 16;
+          if(br.height > 10) meetTop = (br.top - slotTop) + (br.height / 2) - halfOrb;
         }
-        if(meetTop === null) meetTop = (dist / 2) - 16;
+        if(meetTop === null) meetTop = (dist / 2) - halfOrb;
         if(!orb.dataset.yyMoved) orb.style.top = meetTop + 'px';
         orb.style.setProperty('--from', '56px');
         if(orbYin){
@@ -7250,6 +7252,13 @@ setTimeout(function(){ document.body.classList.remove('first-load'); }, 5200);
     if(!yang || !yin) return true;
     if(yang.dataset.yyMoved) return true;
     if(!yang.animate) return true;   /* no WAAPI: the slots' own fade stands */
+    /* MOBILE CALIBRATION (Nov 9): on phones the banner reaches its
+       final PC-scale layout only once the document is complete — a
+       parse-time capture flew to a phantom 390px banner and the
+       halves landed off the headphone. Phones wait for 'complete'
+       (the load retry below is already registered). PC is untouched:
+       it captures at parse, exactly as before. */
+    if(window.innerWidth <= 760 && document.readyState !== 'complete') return false;
     var ir = img.getBoundingClientRect();
     if(ir.width < 40) return false;  /* banner not laid out yet — retry */
     var tx = ir.left + VX * ir.width, ty = ir.top + VY * ir.height, td = VD * ir.width;
