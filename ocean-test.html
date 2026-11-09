@@ -213,6 +213,21 @@
   .frame-inner iframe{width:100%; aspect-ratio:16/9; border:0; display:block;}
   .frame-inner audio{width:100%; padding:22px 14px;}
   .plaque{padding:20px 24px 22px; text-align:center;}
+  /* ROUND 2 — exhibit carousels: one exhibit, a whole set of
+     photos. Arrows for PC, a swipe for phones, dots + a counter. */
+  .oc-car{line-height:1;}
+  .oc-car-stage{position:relative; overflow:hidden; line-height:0; background:#0d0817;}
+  .oc-car-track{display:flex; transition:transform .45s ease; touch-action:pan-y;}
+  .oc-car-slide{flex:0 0 100%; min-width:0;}
+  .oc-car-slide img{width:100%; height:auto; display:block; -webkit-user-drag:none; user-select:none;}
+  .oc-car-btn{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; border:1px solid var(--gold); background:rgba(21,13,32,.72); color:var(--gold); font-size:24px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; z-index:2;}
+  .oc-car-btn:hover{background:var(--gold); color:var(--bg);}
+  .oc-car-prev{left:10px;}
+  .oc-car-next{right:10px;}
+  .oc-car-count{position:absolute; top:10px; right:12px; z-index:2; font-family:"IBM Plex Mono", monospace; font-size:11.5px; color:var(--cream); background:rgba(21,13,32,.72); border:1px solid rgba(240,183,63,.4); border-radius:999px; padding:3px 10px; line-height:1.2;}
+  .oc-car-dots{display:flex; justify-content:center; gap:7px; padding:9px 0 3px; background:#0d0817;}
+  .oc-car-dot{width:9px; height:9px; border-radius:50%; border:1px solid var(--gold); background:transparent; padding:0; cursor:pointer;}
+  .oc-car-dot.on{background:var(--gold);}
   .plaque .room{
     font-family:"IBM Plex Mono", monospace; font-size:11px; letter-spacing:.32em;
     text-transform:uppercase; color:var(--gold);
@@ -555,6 +570,10 @@
         <label for="upFile">Upload a file (image, song, or video)</label>
         <input type="file" id="upFile" accept="image/*,audio/*,video/*">
       </div>
+      <div class="field">
+        <label for="upCarousel">Or a carousel — pick 2 or more photos, hung together as one exhibit</label>
+        <input type="file" id="upCarousel" accept="image/*" multiple>
+      </div>
       <div class="or-line">— or hang it by link: no storage used, unlimited exhibits —</div>
       <div class="field">
         <label for="upLink">Paste any link — YouTube, an image, a song, or a video file</label>
@@ -732,6 +751,18 @@ async function loadFeed() {
 function mediaHtml(ex) {
   const url = escapeHtml(ex.media_url);
   if (ex.media_type === "image") {
+    // ROUND 2: an exhibit with a whole set of photos hangs as a
+    // carousel; media_url stays the first photo, as before.
+    const urls = (Array.isArray(ex.media_urls) ? ex.media_urls : []).filter(u => typeof u === "string" && u);
+    if (urls.length >= 2) {
+      const slides = urls.map(u => `<div class="oc-car-slide"><img src="${escapeHtml(u)}" alt="${escapeHtml(ex.title)}" loading="lazy"></div>`).join("");
+      const dots = urls.map((u, i) => `<button type="button" class="oc-car-dot${i === 0 ? " on" : ""}" aria-label="Photo ${i + 1} of ${urls.length}"></button>`).join("");
+      return `<div class="oc-car"><div class="oc-car-stage"><div class="oc-car-track">${slides}</div>` +
+        `<button type="button" class="oc-car-btn oc-car-prev" aria-label="Previous photo">‹</button>` +
+        `<button type="button" class="oc-car-btn oc-car-next" aria-label="Next photo">›</button>` +
+        `<span class="oc-car-count">1 / ${urls.length}</span></div>` +
+        `<div class="oc-car-dots">${dots}</div></div>`;
+    }
     return `<img src="${url}" alt="${escapeHtml(ex.title)}" loading="lazy">`;
   }
   if (ex.media_type === "audio") {
@@ -774,6 +805,34 @@ function renderCard(ex) {
         <div class="status comment-status"></div>
       </div>
     </div>`;
+
+  /* --- carousel: arrows, dots and swipes walk the photos --- */
+  const ocCar = card.querySelector(".oc-car");
+  if (ocCar) {
+    const track = ocCar.querySelector(".oc-car-track");
+    const count = ocCar.querySelector(".oc-car-count");
+    const dotEls = Array.from(ocCar.querySelectorAll(".oc-car-dot"));
+    const total = dotEls.length;
+    let idx = 0;
+    const go = (i) => {
+      idx = ((i % total) + total) % total;
+      track.style.transform = "translateX(" + (-idx * 100) + "%)";
+      if (count) count.textContent = (idx + 1) + " / " + total;
+      dotEls.forEach((d, j) => d.classList.toggle("on", j === idx));
+    };
+    ocCar.querySelector(".oc-car-prev").addEventListener("click", () => go(idx - 1));
+    ocCar.querySelector(".oc-car-next").addEventListener("click", () => go(idx + 1));
+    dotEls.forEach((d, j) => d.addEventListener("click", () => go(j)));
+    let sx = null;
+    ocCar.addEventListener("pointerdown", (e) => { e.preventDefault(); sx = e.clientX; });
+    ocCar.addEventListener("pointerup", (e) => {
+      if (sx === null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
+    });
+    ocCar.addEventListener("pointercancel", () => { sx = null; });
+    go(0);
+  }
 
   /* --- like button: one like per browser, tracked in localStorage --- */
   const likeBtn = card.querySelector(".like-btn");
@@ -850,16 +909,45 @@ if (db) {
     const title = $("upTitle").value.trim();
     const room = $("upRoom").value;
     const file = $("upFile").files[0];
+    const carFiles = Array.from($("upCarousel").files || []);
     const link = $("upLink").value.trim();
 
     if (!title) { status.textContent = "Give the piece a title first."; return; }
-    if (!file && !link) { status.textContent = "Pick a file or paste a link."; return; }
+    if (!file && !link && !carFiles.length) { status.textContent = "Pick a file, a carousel set, or paste a link."; return; }
+    if (carFiles.length && (file || link)) { status.textContent = "One exhibit, one door — a carousel hangs on its own. Clear the file and the link, or clear the carousel picks."; return; }
+    if (carFiles.length === 1) { status.textContent = "A carousel needs at least two photos — add one more, or hang the single photo with the file picker above."; return; }
 
     btn.disabled = true;
     try {
-      let mediaType, mediaUrl;
+      let mediaType, mediaUrl, mediaUrls = null, totalBytes = 0;
 
-      if (link) {
+      if (carFiles.length >= 2) {
+        // Carousel exhibit — every photo rides the same vault road
+        // as a single file; the exhibit keeps the whole list, and
+        // the vault meter counts the whole set.
+        for (const cf of carFiles) {
+          if (!cf.type.startsWith("image/")) throw new Error("A carousel takes photos only.");
+        }
+        const { data: { session } } = await db.auth.getSession();
+        if (!session) throw new Error("Sign in as curator first.");
+        mediaUrls = [];
+        for (let i = 0; i < carFiles.length; i++) {
+          status.textContent = "Uploading photo " + (i + 1) + " of " + carFiles.length + "…";
+          const form = new FormData();
+          form.append("file", carFiles[i]);
+          const upResp = await fetch(WORKER_UPLOAD_URL, {
+            method: "POST",
+            headers: { Authorization: "Bearer " + session.access_token },
+            body: form,
+          });
+          const upJson = await upResp.json().catch(() => ({}));
+          if (!upResp.ok || !upJson.url) throw new Error(upJson.error || "Upload failed.");
+          mediaUrls.push(upJson.url);
+          totalBytes += carFiles[i].size;
+        }
+        mediaType = "image";
+        mediaUrl = mediaUrls[0];
+      } else if (link) {
         // Link exhibit — nothing is stored in the vault; the page frames
         // the source, so link exhibits are unlimited and cost no storage.
         if (youtubeId(link)) {
@@ -900,8 +988,18 @@ if (db) {
       }
 
       status.textContent = "Hanging it on the wall…";
-      const { error: insError } = await db.from("exhibits")
-        .insert({ title, room, media_type: mediaType, media_url: mediaUrl, size_bytes: link ? 0 : (file ? file.size : 0) });
+      const row = { title, room, media_type: mediaType, media_url: mediaUrl, size_bytes: mediaUrls ? totalBytes : (link ? 0 : (file ? file.size : 0)) };
+      if (mediaUrls && !window.__bwOceanNoMediaUrls) row.media_urls = mediaUrls;
+      let ins = await db.from("exhibits").insert(row);
+      if (ins.error && mediaUrls && /media_urls/.test(ins.error.message || "")) {
+        // The notebook does not know media_urls yet — the exhibit
+        // still hangs, wearing its first photo, and carousels
+        // light up the moment the column lands.
+        window.__bwOceanNoMediaUrls = true;
+        delete row.media_urls;
+        ins = await db.from("exhibits").insert(row);
+      }
+      const insError = ins.error;
       if (insError) throw insError;
 
       status.textContent = "✔ Hung: “" + title + "” is live in the museum.";
