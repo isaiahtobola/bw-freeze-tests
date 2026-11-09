@@ -22,6 +22,9 @@
     --cream-dim:#cbbf9f;
     --line:rgba(240,183,63,.35);
     --line-soft:rgba(240,183,63,.16);
+    --well:#0d0817;
+    --scrim:rgba(21,13,32,.72);
+    --tint:rgba(240,183,63,.08);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -138,7 +141,7 @@
 
   /* ---------- Notices & panels ---------- */
   .notice{
-    border:1px solid var(--gold); background:rgba(240,183,63,.08); color:var(--gold-bright);
+    border:1px solid var(--gold); background:var(--tint); color:var(--gold-bright);
     font-family:"IBM Plex Mono", monospace; font-size:13px; line-height:1.6;
     padding:14px 16px; border-radius:6px; margin:22px 0; text-align:center;
   }
@@ -207,7 +210,7 @@
   .frame{padding:12px 12px 0;}
   .frame-inner{
     border:2px solid var(--gold); outline:1px solid rgba(0,0,0,.55); outline-offset:-7px;
-    background:#0d0817; line-height:0;
+    background:var(--well); line-height:0;
   }
   .frame-inner img, .frame-inner video{width:100%; height:auto; display:block;}
   .frame-inner iframe{width:100%; aspect-ratio:16/9; border:0; display:block;}
@@ -216,16 +219,16 @@
   /* ROUND 2 — exhibit carousels: one exhibit, a whole set of
      photos. Arrows for PC, a swipe for phones, dots + a counter. */
   .oc-car{line-height:1;}
-  .oc-car-stage{position:relative; overflow:hidden; line-height:0; background:#0d0817;}
+  .oc-car-stage{position:relative; overflow:hidden; line-height:0; background:var(--well);}
   .oc-car-track{display:flex; transition:transform .45s ease; touch-action:pan-y;}
   .oc-car-slide{flex:0 0 100%; min-width:0;}
   .oc-car-slide img{width:100%; height:auto; display:block; -webkit-user-drag:none; user-select:none;}
-  .oc-car-btn{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; border:1px solid var(--gold); background:rgba(21,13,32,.72); color:var(--gold); font-size:24px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; z-index:2;}
+  .oc-car-btn{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; border:1px solid var(--gold); background:var(--scrim); color:var(--gold); font-size:24px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; z-index:2;}
   .oc-car-btn:hover{background:var(--gold); color:var(--bg);}
   .oc-car-prev{left:10px;}
   .oc-car-next{right:10px;}
-  .oc-car-count{position:absolute; top:10px; right:12px; z-index:2; font-family:"IBM Plex Mono", monospace; font-size:11.5px; color:var(--cream); background:rgba(21,13,32,.72); border:1px solid rgba(240,183,63,.4); border-radius:999px; padding:3px 10px; line-height:1.2;}
-  .oc-car-dots{display:flex; justify-content:center; gap:7px; padding:9px 0 3px; background:#0d0817;}
+  .oc-car-count{position:absolute; top:10px; right:12px; z-index:2; font-family:"IBM Plex Mono", monospace; font-size:11.5px; color:var(--cream); background:var(--scrim); border:1px solid var(--line); border-radius:999px; padding:3px 10px; line-height:1.2;}
+  .oc-car-dots{display:flex; justify-content:center; gap:7px; padding:9px 0 3px; background:var(--well);}
   .oc-car-dot{width:9px; height:9px; border-radius:50%; border:1px solid var(--gold); background:transparent; padding:0; cursor:pointer;}
   .oc-car-dot.on{background:var(--gold);}
   .plaque .room{
@@ -243,7 +246,7 @@
 
   /* ---------- Comments ---------- */
   .comments{border-top:1px solid var(--line-soft); margin-top:18px; padding-top:16px; text-align:left;}
-  .comment{padding:10px 0; border-bottom:1px solid rgba(240,183,63,.08);}
+  .comment{padding:10px 0; border-bottom:1px solid var(--tint);}
   .comment:last-of-type{border-bottom:none;}
   .comment .cname{font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--gold-bright);}
   .comment .cdate{font-family:"IBM Plex Mono", monospace; font-size:11px; color:var(--cream-dim); margin-left:8px;}
@@ -323,7 +326,13 @@
      Closed and breathing; a tap slides them apart onto the entry gate. ---------- */
   #doors{
     position:fixed; inset:0; z-index:60; display:flex; overflow:hidden;
-    cursor:pointer; background:var(--bg); outline:none;
+    /* GAP FIX (Nov 9): no background of its own — the gate hangs
+       fully painted behind the curtains from the first frame, and
+       the parting itself reveals it. The old var(--bg) wash on this
+       full-screen box kept painting solid dark over the gate until
+       the hide timer fired: the empty beat between curtain and
+       room. The panels still cover every pixel while closed. */
+    cursor:pointer; background:transparent; outline:none;
   }
   #doors .door-panel{
     position:relative; width:50%; height:100%; flex:0 0 50%;
@@ -336,7 +345,7 @@
       repeating-linear-gradient(90deg,
         rgba(8,3,18,.42) 0px, rgba(46,29,79,.12) 14px, rgba(255,232,190,.07) 27px,
         rgba(23,13,41,0) 42px, rgba(8,3,18,.34) 58px, rgba(23,13,41,0) 72px),
-      linear-gradient(160deg, var(--panel-2), var(--panel) 55%, #170d29);
+      linear-gradient(160deg, #291b44, #1f1433 55%, #170d29);
     background-size:auto, 144px 100%, auto;
     transition:transform 1.6s cubic-bezier(.55,.06,.16,1); will-change:transform;
     animation:foldDrift 14s ease-in-out infinite alternate;
@@ -404,7 +413,7 @@
     border:2px solid var(--gold); color:var(--gold-bright);
     display:flex; align-items:center; justify-content:center;
     font-size:30px; font-style:italic; font-weight:700;
-    background:radial-gradient(circle at 50% 38%, var(--panel-2), var(--panel) 75%);
+    background:radial-gradient(circle at 50% 38%, #291b44, #1f1433 75%);
     box-shadow:0 0 26px rgba(240,183,63,.35), inset 0 0 18px rgba(0,0,0,.5);
     animation:medalBreath 4.2s ease-in-out infinite;
   }
@@ -449,6 +458,34 @@
     #doors .door-seam, #doors .door-breath, #doors .door-medal, #doors .door-hint{animation:none;}
     #doors .door-panel{transition:transform .3s ease; animation:none;}
   }
+  /* ---------- Happy Holidays toggle (Nov 9): mirrors Broken
+     World's holiday button — same cycle, same season law. An
+     invisible sizer pins the button's box, like the main site's,
+     so the label's words never change its size. */
+  .ocean-holiday-btn{
+    font-family:"IBM Plex Mono", monospace; font-size:11px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--gold); background:none;
+    border:1px solid var(--line-soft); border-radius:999px; padding:8px 14px;
+    cursor:pointer; white-space:nowrap;
+    transition:border-color .25s ease, color .25s ease;
+  }
+  .ocean-holiday-btn:hover{color:var(--gold-bright); border-color:var(--gold); background:none;}
+  .ocean-holiday-btn.locked{opacity:.42; filter:grayscale(1); cursor:not-allowed;}
+  .ocean-holiday-btn .h-stack{display:inline-grid; vertical-align:top;}
+  .ocean-holiday-btn .h-stack>*{grid-area:1/1;}
+  .ocean-holiday-btn .h-sizer{visibility:hidden;}
+  .ocean-holiday-btn .h-label{text-align:center; white-space:nowrap;}
+  /* theme swaps land in one paint — the main site's own guard */
+  html.bw-theme-swap *, html.bw-theme-swap *::before, html.bw-theme-swap *::after{transition:none !important;}
+  #oceanToast{
+    position:fixed; left:50%; bottom:26px; z-index:80; max-width:88vw; text-align:center;
+    transform:translateX(-50%) translateY(16px); opacity:0; pointer-events:none;
+    background:var(--panel); color:var(--cream); border:1px solid var(--gold);
+    border-radius:999px; padding:10px 20px;
+    font-family:"IBM Plex Mono", monospace; font-size:12px; letter-spacing:.06em;
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  #oceanToast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body class="locked">
@@ -464,17 +501,26 @@
     var inSeason = md >= 930 || md <= 101;
     var t = '';
     if((q === 'halloween' || q === 'xmas') && inSeason){ t = q; try{ sessionStorage.setItem('bw-ocean-theme', q); }catch(e){} }
-    else if(inSeason){ try{ t = sessionStorage.getItem('bw-ocean-theme') || ''; }catch(e){} }
+    else if(inSeason){ try{ t = sessionStorage.getItem('bw-ocean-theme') || localStorage.getItem('bw-ocean-theme') || ''; }catch(e){} }
     if(t === 'halloween' || t === 'xmas') document.body.setAttribute('data-theme', t);
   }catch(e){}
 })();
 </script>
 <style>
-  /* FINAL FIXES (Nov 9): the Ocean in season dress — Halloween
-     turns the gold to ember orange and the plum to near-black
-     brown; Christmas greens the rooms while the gold stays gold. */
-  body[data-theme="halloween"]{--bg:#0d0603;--panel:#1a0d05;--panel-2:#2a1408;--gold:#ff8c1a;--gold-bright:#ffab4a;--cream:#ffedd8;--cream-dim:#d9b78f;--line:rgba(255,140,26,.42);--line-soft:rgba(255,140,26,.18)}
-  body[data-theme="xmas"]{--bg:#08130b;--panel:#0e2413;--panel-2:#16351d;--cream:#f2f7e8;--cream-dim:#b9cfa8;--line:rgba(240,183,63,.4);--line-soft:rgba(240,183,63,.18)}
+  /* HOLIDAY THEMES (Nov 9): the Ocean wears Broken World's own
+     designated families — Halloween: plum goes black, gold goes
+     ember orange. Christmas: plum goes green, gold goes red.
+     Normal days stay plum-and-gold. The door curtains' fabric is
+     pinned plum in the main sheet: the doors are the museum's
+     face in every season, the way the main site's banner
+     pictures stay unedited. */
+  body[data-theme="halloween"]{--bg:#0a0605;--panel:#17100b;--panel-2:#211710;--gold:#ff8c1a;--gold-bright:#ffa53a;--cream:#ffe8d1;--cream-dim:#d9b48f;--line:rgba(255,140,26,.42);--line-soft:rgba(255,140,26,.18);--well:#070302;--scrim:rgba(10,6,5,.78);--tint:rgba(255,140,26,.10)}
+  body[data-theme="xmas"]{--bg:#07160c;--panel:#0d2416;--panel-2:#12331e;--gold:#d93636;--gold-bright:#ff5a4d;--cream:#ffefe0;--cream-dim:#a8c9ae;--line:rgba(217,54,54,.42);--line-soft:rgba(217,54,54,.18);--well:#04120a;--scrim:rgba(7,22,12,.78);--tint:rgba(217,54,54,.10)}
+  body[data-theme="halloween"] #pulseGlow{background:radial-gradient(ellipse at 50% 38%, rgba(255,140,26,.14), rgba(122,52,10,.12) 45%, transparent 75%)}
+  body[data-theme="xmas"] #pulseGlow{background:radial-gradient(ellipse at 50% 38%, rgba(217,54,54,.12), rgba(46,125,70,.12) 45%, transparent 75%)}
+  /* canvas art leans into the season, the main site's own filters */
+  body[data-theme="halloween"] #gateCanvas, body[data-theme="halloween"] #stars{filter:hue-rotate(-18deg) saturate(1.18)}
+  body[data-theme="xmas"] #gateCanvas, body[data-theme="xmas"] #stars{filter:hue-rotate(-32deg) saturate(1.22)}
 </style>
 
 <canvas id="stars"></canvas>
@@ -509,7 +555,10 @@
   <button id="bwBtn" type="button">Are you BW Young Bo?</button>
   <button id="enterBtn" type="button">Are you a viewer?</button>
   <a class="home-link" href="https://bwyoungbo.com">&larr; Broken World home</a>
+  <button class="ocean-holiday-btn" type="button" title="Cycle the season: Normal → Halloween → Christmas → Normal"><span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label">Happy Holidays</span></span></button>
 </div>
+
+<div id="oceanToast" role="status" aria-live="polite"></div>
 
 <div class="wrap">
 
@@ -522,6 +571,7 @@
       </div>
     </div>
     <a class="home-link" href="https://bwyoungbo.com">&larr; Broken World home</a>
+    <button class="ocean-holiday-btn" id="oceanHolidayBtn" type="button" title="Cycle the season: Normal → Halloween → Christmas → Normal"><span class="h-stack"><span class="h-sizer" aria-hidden="true">Happy Holidays</span><span class="h-label">Happy Holidays</span></span></button>
     <!-- Curator sign-in: opens only from the gate's "Are you BW Young Bo?" door
          (or the tiny Curator door in the footer) — visitors never see it -->
     <div class="curator-box" id="curatorBox" hidden>
@@ -1136,11 +1186,18 @@ loadVaultMeter();
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const glow = document.getElementById("pulseGlow");
   const LIGHTS = ["#221540", "#281a4a", "#2b1c50", "#201238"];
+  /* HOLIDAY THEMES (Nov 9): in season the breath lifts in the
+     season's own tones — plum never leaks over a holiday. */
+  const LIGHTS_BY_THEME = {
+    halloween: ["#2b1c10", "#33200f", "#3a2410", "#291a0d"],
+    xmas: ["#173d24", "#1d4a2c", "#1a4227", "#14331d"]
+  };
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
   const wait = (min, max) => min + Math.random() * (max - min);
 
   function breathe() {
-    document.body.style.backgroundColor = pick(LIGHTS);
+    const themeNow = document.body.getAttribute("data-theme") || "";
+    document.body.style.backgroundColor = pick(LIGHTS_BY_THEME[themeNow] || LIGHTS);
     glow.style.opacity = (0.5 + Math.random() * 0.35).toFixed(2);
     setTimeout(() => {
       document.body.style.backgroundColor = "";
@@ -1354,6 +1411,79 @@ loadVaultMeter();
     doors.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDoors(); }
     });
+  })();
+</script>
+<script>
+  /* HAPPY HOLIDAYS (Nov 9) — the Ocean's own season button,
+     mirroring Broken World's exactly: the cycle runs Normal →
+     Halloween → Christmas → Normal, and the SEASON LAW holds —
+     the themes only exist Sep 30 → Jan 1; outside the window the
+     button greys out and locks, and any leftover seasonal theme
+     is put away. A theme handed over by the main site's Ocean
+     door (?theme=) or picked here is remembered in
+     'bw-ocean-theme'; a fresh visitor with neither simply lands
+     on plum-and-gold. */
+  (function () {
+    var THEMES = ['', 'halloween', 'xmas'];
+    var LABELS = { '': 'Happy Holidays', 'halloween': 'Halloween', 'xmas': 'Christmas' };
+    function seasonOpen() {
+      var n = new Date(), m = n.getMonth(), d = n.getDate();
+      return (m > 8 || (m === 8 && d >= 30)) || (m === 0 && d <= 1);
+    }
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.ocean-holiday-btn'));
+    if (!btns.length) return;
+    var toastEl = document.getElementById('oceanToast'), toastTimer = null;
+    function toast(msg) {
+      if (!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2600);
+    }
+    var theme = document.body.getAttribute('data-theme') || '';
+    if (THEMES.indexOf(theme) < 0) theme = '';
+    function applyTheme() {
+      var open = seasonOpen();
+      if (!open) theme = '';
+      /* swap guard: freeze transitions for the length of the swap
+         so the recolor lands in one paint — the main site's trick */
+      document.documentElement.classList.add('bw-theme-swap');
+      setTimeout(function () { document.documentElement.classList.remove('bw-theme-swap'); }, 400);
+      if (theme) document.body.setAttribute('data-theme', theme);
+      else document.body.removeAttribute('data-theme');
+      /* a breath mid-hold paints the body inline — clear it so
+         the new season owns the whole page from the first paint */
+      document.body.style.backgroundColor = '';
+      btns.forEach(function (b) {
+        var label = b.querySelector('.h-label');
+        if (open) {
+          b.removeAttribute('disabled');
+          b.classList.remove('locked');
+          if (label) label.textContent = LABELS[theme];
+          b.title = 'Cycle the season: Normal → Halloween → Christmas → Normal';
+        } else {
+          b.setAttribute('disabled', '');
+          b.classList.add('locked');
+          if (label) label.textContent = 'Happy Holidays';
+          b.title = 'Locked — the season runs Sep 30 to Jan 1.';
+        }
+      });
+      try {
+        localStorage.setItem('bw-ocean-theme', theme);
+        sessionStorage.setItem('bw-ocean-theme', theme);
+      } catch (e) {}
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (!seasonOpen()) { toast('The holidays are locked until September 30.'); return; }
+        theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+        applyTheme();
+        toast(theme === 'halloween' ? 'Halloween mode — plum goes black, gold goes orange.'
+          : theme === 'xmas' ? 'Christmas mode — plum goes green, gold goes red.'
+          : 'Back to the plum & gold.');
+      });
+    });
+    applyTheme();
   })();
 </script>
 <script>
