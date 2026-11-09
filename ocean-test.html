@@ -475,6 +475,11 @@
   .ocean-holiday-btn .h-stack>*{grid-area:1/1;}
   .ocean-holiday-btn .h-sizer{visibility:hidden;}
   .ocean-holiday-btn .h-label{text-align:center; white-space:nowrap;}
+  /* the gate copy rides the very top of the gate view — clear to
+     users the moment the gate shows (Isaiah, Nov 9) */
+  #gate .ocean-holiday-btn{
+    position:absolute; top:18px; left:50%; transform:translateX(-50%); z-index:2;
+  }
   /* theme swaps land in one paint — the main site's own guard */
   html.bw-theme-swap *, html.bw-theme-swap *::before, html.bw-theme-swap *::after{transition:none !important;}
   #oceanToast{
@@ -521,6 +526,93 @@
   /* canvas art leans into the season, the main site's own filters */
   body[data-theme="halloween"] #gateCanvas, body[data-theme="halloween"] #stars{filter:hue-rotate(-18deg) saturate(1.18)}
   body[data-theme="xmas"] #gateCanvas, body[data-theme="xmas"] #stars{filter:hue-rotate(-32deg) saturate(1.22)}
+  /* DOORS TAKE THE SEASON (Nov 9 — Isaiah reversed the plum pin
+     himself: "change the plum curtains too match holiday theme"):
+     fabric, lattice, fringe, seam light, breath and medallion
+     dress in the visitor's theme. Halloween: orange on black
+     cloth. Christmas: red trim on green cloth. Normal days the
+     plum tapestry above stands untouched. Panel backgrounds keep
+     exactly three layers so the fold-drift sizes still map. */
+  body[data-theme="halloween"] #doors .door-panel{
+    background:
+      linear-gradient(180deg, rgba(255,165,58,.06), rgba(0,0,0,0) 30%),
+      repeating-linear-gradient(90deg,
+        rgba(0,0,0,.5) 0px, rgba(255,140,26,.10) 14px, rgba(255,232,190,.05) 27px,
+        rgba(23,16,11,0) 42px, rgba(0,0,0,.4) 58px, rgba(23,16,11,0) 72px),
+      linear-gradient(160deg, #211710, #17100b 55%, #0a0605);
+  }
+  body[data-theme="xmas"] #doors .door-panel{
+    background:
+      linear-gradient(180deg, rgba(255,90,77,.05), rgba(0,0,0,0) 30%),
+      repeating-linear-gradient(90deg,
+        rgba(2,10,4,.5) 0px, rgba(168,201,174,.10) 14px, rgba(255,239,224,.05) 27px,
+        rgba(13,36,22,0) 42px, rgba(2,10,4,.4) 58px, rgba(13,36,22,0) 72px),
+      linear-gradient(160deg, #12331e, #0d2416 55%, #07160c);
+  }
+  body[data-theme="halloween"] #doors .door-panel::before{
+    background:
+      repeating-linear-gradient(45deg, rgba(255,140,26,.055) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(-45deg, rgba(255,140,26,.055) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(0deg, rgba(255,232,190,.028) 0 1px, transparent 1px 5px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.16) 0 1px, transparent 1px 5px);
+  }
+  body[data-theme="xmas"] #doors .door-panel::before{
+    background:
+      repeating-linear-gradient(45deg, rgba(217,54,54,.06) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(-45deg, rgba(217,54,54,.06) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(0deg, rgba(255,239,224,.028) 0 1px, transparent 1px 5px),
+      repeating-linear-gradient(90deg, rgba(2,10,4,.16) 0 1px, transparent 1px 5px);
+  }
+  body[data-theme="halloween"] #doors .door-panel::after{
+    background:
+      repeating-linear-gradient(90deg, rgba(255,140,26,.5) 0 2px, transparent 2px 9px) bottom / 100% 26px no-repeat,
+      linear-gradient(180deg, transparent, rgba(255,140,26,.16) 62%, rgba(255,140,26,.05));
+    border-top:2px solid rgba(255,140,26,.45);
+  }
+  body[data-theme="xmas"] #doors .door-panel::after{
+    background:
+      repeating-linear-gradient(90deg, rgba(217,54,54,.5) 0 2px, transparent 2px 9px) bottom / 100% 26px no-repeat,
+      linear-gradient(180deg, transparent, rgba(217,54,54,.16) 62%, rgba(217,54,54,.05));
+    border-top:2px solid rgba(217,54,54,.45);
+  }
+  body[data-theme="halloween"] #doors .door-l{box-shadow:inset -18px 0 34px -18px rgba(255,140,26,.35), inset 0 0 90px rgba(0,0,0,.55);}
+  body[data-theme="halloween"] #doors .door-r{box-shadow:inset 18px 0 34px -18px rgba(255,140,26,.35), inset 0 0 90px rgba(0,0,0,.55);}
+  body[data-theme="xmas"] #doors .door-l{box-shadow:inset -18px 0 34px -18px rgba(217,54,54,.3), inset 0 0 90px rgba(0,0,0,.55);}
+  body[data-theme="xmas"] #doors .door-r{box-shadow:inset 18px 0 34px -18px rgba(217,54,54,.3), inset 0 0 90px rgba(0,0,0,.55);}
+  body[data-theme="halloween"] #doors .door-seam{
+    background:linear-gradient(180deg, rgba(255,165,58,.15), rgba(255,165,58,.85) 50%, rgba(255,165,58,.15));
+    animation-name:doorBreathHw;
+  }
+  body[data-theme="xmas"] #doors .door-seam{
+    background:linear-gradient(180deg, rgba(255,90,77,.15), rgba(255,90,77,.85) 50%, rgba(255,90,77,.15));
+    animation-name:doorBreathXm;
+  }
+  @keyframes doorBreathHw{
+    0%,100%{opacity:.45; box-shadow:0 0 12px 2px rgba(255,140,26,.25);}
+    50%{opacity:1; box-shadow:0 0 30px 8px rgba(255,140,26,.5);}
+  }
+  @keyframes doorBreathXm{
+    0%,100%{opacity:.45; box-shadow:0 0 12px 2px rgba(217,54,54,.25);}
+    50%{opacity:1; box-shadow:0 0 30px 8px rgba(217,54,54,.5);}
+  }
+  body[data-theme="halloween"] #doors .door-breath{background:radial-gradient(ellipse 46% 62% at 50% 50%, rgba(255,140,26,.13), rgba(255,140,26,0) 70%);}
+  body[data-theme="xmas"] #doors .door-breath{background:radial-gradient(ellipse 46% 62% at 50% 50%, rgba(217,54,54,.12), rgba(217,54,54,0) 70%);}
+  body[data-theme="halloween"] #doors .door-medal{
+    background:radial-gradient(circle at 50% 38%, #211710, #0a0605 75%);
+    animation-name:medalBreathHw;
+  }
+  body[data-theme="xmas"] #doors .door-medal{
+    background:radial-gradient(circle at 50% 38%, #571212, #2a0808 75%);
+    animation-name:medalBreathXm;
+  }
+  @keyframes medalBreathHw{
+    0%,100%{box-shadow:0 0 16px rgba(255,140,26,.22), inset 0 0 18px rgba(0,0,0,.5);}
+    50%{box-shadow:0 0 34px rgba(255,140,26,.5), inset 0 0 18px rgba(0,0,0,.5);}
+  }
+  @keyframes medalBreathXm{
+    0%,100%{box-shadow:0 0 16px rgba(217,54,54,.22), inset 0 0 18px rgba(0,0,0,.5);}
+    50%{box-shadow:0 0 34px rgba(217,54,54,.5), inset 0 0 18px rgba(0,0,0,.5);}
+  }
 </style>
 
 <canvas id="stars"></canvas>
